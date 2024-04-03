@@ -17,5 +17,5 @@
   }
 }
 .logo_text {
-  @apply max-sm:hidden  font-semibold text-lg text-black tracking-wide;
+  @apply font-semibold text-lg text-black tracking-wide;
 }
