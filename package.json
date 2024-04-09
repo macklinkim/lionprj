@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.28.14",
+    "@tanstack/react-query-devtools": "^5.28.14",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "circular-json": "^0.5.9",
     "cookie": "^0.6.0",
     "dotenv": "^16.4.5",
     "eslint-config-prettier": "^9.1.0",

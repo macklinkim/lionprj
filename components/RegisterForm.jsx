@@ -23,6 +23,22 @@ function RegisterForm() {
 			password: "",
 		},
 	});
+  function stringify(obj) {
+    let cache = [];
+    let str = JSON.stringify(obj, function(key, value) {
+      if (typeof value === "object" && value !== null) {
+        if (cache.indexOf(value) !== -1) {
+          // Circular reference found, discard key
+          return;
+        }
+        // Store value in our collection
+        cache.push(value);
+      }
+      return value;
+    });
+    cache = null; // reset the cache
+    return str;
+  }
 	const onSubmit = async formData => {
 		let newFormData = {};
 		if (formData.password1 !== formData.password2) {
@@ -36,7 +52,6 @@ function RegisterForm() {
 				draft.phone = "010" + formData.phone;
 			});
 		}
-		console.log(newFormData);
 		//todo:추후 axios로 변경할것
 		try {
 			const resUserExists = await fetch("api/userExists", {
@@ -44,9 +59,7 @@ function RegisterForm() {
 				headers: {
 					"content-type": "application/json",
 				},
-				body: JSON.stringify({
-					email,
-				}),
+				body: stringify(email)
 			});
 			const { user } = await resUserExists.json();
 
@@ -61,7 +74,7 @@ function RegisterForm() {
 					"content-type": "application/json",
 				},
 				body: JSON.stringify({
-					...newFormData,
+					...newFormData
 				}),
 			});
 			if (res.ok) {

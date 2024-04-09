@@ -1,8 +1,11 @@
 import React from 'react'
+import ShoppingLayout from './../../components/ShoppingLayout';
 
 function Shopping() {
   return (
-    <div>Shopping</div>
+    <div>
+      <ShoppingLayout></ShoppingLayout>
+    </div>
   )
 }
 
