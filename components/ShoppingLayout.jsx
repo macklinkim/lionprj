@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 // import ShoppingCard from "./ShoppingCard";
 // import axios from "axios";
 const getProducts = async () => {
+  //local로 변경
 	try {
-		const res = await fetch("http://localhost:3000/api/products", {
+		const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL+"/api/products", {
 			cache: "no-store",
 		});
 		if (!res) {

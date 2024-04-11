@@ -16,7 +16,6 @@
     "bcryptjs": "^2.4.3",
     "circular-json": "^0.5.9",
     "cookie": "^0.6.0",
-    "dotenv": "^16.4.5",
     "eslint-config-prettier": "^9.1.0",
     "immer": "^10.0.4",
     "jsonwebtoken": "^9.0.2",

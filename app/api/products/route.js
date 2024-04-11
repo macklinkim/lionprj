@@ -6,7 +6,6 @@ export async function GET() {
   try {
     await connectToDB();
     const product = await Product.find();
-    console.log('try to get in Products data',product);
     return NextResponse.json({product});
   } catch (error) {
     console.log(error);
