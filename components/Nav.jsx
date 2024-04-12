@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import UserInfo from "./UserInfo";
 const links = [
 	{
 		id: 1,
@@ -16,49 +17,46 @@ const links = [
 	},
 	{
 		id: 3,
-		title: "test1",
-		url: "/test1",
-	},
-	{
-		id: 4,
 		title: "About",
 		url: "/about",
 	},
 	{
-		id: 5,
+		id: 4,
 		title: "Contact",
 		url: "/contact",
 	},
 	{
-		id: 6,
+		id: 5,
 		title: "shopping",
 		url: "/shopping",
-	},
-  {
-		id: 7,
-		title: "Login",
-		url: "/login",
 	},
 ];
 function Nav() {
 	const logout = () => {
 		console.log("logout");
 	};
+	const { data: session } = useSession();
 	return (
-		<div className="flex justify-between mb-16 pt-3">
+		<div className="flex justify-between mb-1 pt-3 items-start">
 			Nav
 			<Link href="/" className="flex gap-2 flex-center">
 				<Image src="/assets/images/next.svg" alt="logo" width={30} height={30} className="object-contain" />
 				<p className="logo_text">Lion ShoppingMall</p>
 			</Link>
 			<div className="flex gap-5">
-					{links.map(link => (
-						<Link className="" key={link.id} href={link.url}>
-							{" "}
-							{link.title}
-						</Link>
-					))}
-
+				{links.map(link => (
+					<Link className="" key={link.id} href={link.url}>
+						{" "}
+						{link.title}
+					</Link>
+				))}
+				{!session && (
+					<Link className="" key={6} href="/login">
+						{" "}
+						login
+					</Link>
+				)}
+			{session && <UserInfo></UserInfo>}
 			</div>
 		</div>
 	);
