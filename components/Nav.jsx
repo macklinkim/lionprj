@@ -29,6 +29,10 @@ const links = [
 		id: 5,
 		title: "shopping",
 		url: "/shopping",
+	},{
+		id: 6,
+		title: "upload",
+		url: "/upload",
 	},
 ];
 function Nav() {
