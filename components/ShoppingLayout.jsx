@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-async-client-component */
 /* eslint-disable react/jsx-no-undef */
-"use client"
+"use client";
 import { Link } from "react-router-dom";
+import ShoppingCard from "./ShoppingCard";
 // import ShoppingCard from "./ShoppingCard";
 // import axios from "axios";
 const getProducts = async () => {
-  //local로 변경
+	//local로 변경
 	try {
-		const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL+"/api/products", {
+		const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL + "/api/products", {
 			cache: "no-store",
 		});
 		if (!res) {
@@ -21,9 +22,7 @@ const getProducts = async () => {
 
 export default async function ShoppingLayout() {
 	const res = await getProducts();
-	console.log('res',res);
-	return (
-		<div className="overflow-x-auto">
-		</div>
-	);
+	const itemList = res?.product.map(item => <ShoppingCard key={item._id} item={item} />);
+	// const itemList = res?.product.map((item, index) => (index === 1 ? <ShoppingCard key={item._id} item={item} /> : null));
+	return <div className="overflow-x-auto grid grid-cols-1 md:grid-cols-3">{itemList}</div>;
 }

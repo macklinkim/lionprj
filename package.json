@@ -19,6 +19,7 @@
     "circular-json": "^0.5.9",
     "cookie": "^0.6.0",
     "eslint-config-prettier": "^9.1.0",
+    "html-react-parser": "^5.1.10",
     "immer": "^10.0.4",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
