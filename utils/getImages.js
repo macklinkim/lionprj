@@ -4,7 +4,7 @@ async function getImages(filename) {
 		const imageFiles = [];
 		filename.forEach(async (element, index) => {
 			try {
-				const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL + `/api/download/${element}`, {
+				const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/download/${element}`, {
 					cache: "force-cache",
 				});
 				const pos = await res.json();
@@ -16,7 +16,7 @@ async function getImages(filename) {
     return imageFiles;
 	} else {
 		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL + `/api/download/${filename}`, {
+			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/download/${filename}`, {
 				cache: "force-cache",
 			});
 			const pos = await res.json();

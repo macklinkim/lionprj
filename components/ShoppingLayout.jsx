@@ -6,7 +6,7 @@ async function ShoppingLayout() {
 	const getProducts = async () => {
 		//local로 변경
 		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL + "/api/product", {
+			const res = await fetch(process.env.NEXT_PUBLIC_URL + "/api/product", {
 				next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALDATE) },
 			});
 			if (!res) {

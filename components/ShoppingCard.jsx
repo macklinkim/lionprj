@@ -7,7 +7,7 @@ ShoppingCard.propType = {
 async function ShoppingCard({ item }) {
 	const getImage = async item => {
 		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL + `/api/download/${item.mainImages[0].fileName}`, {
+			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/download/${item.mainImages[0].fileName}`, {
         cache: 'force-cache' ,
 			});
 			const pos = await res.json();
