@@ -1,9 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@components/Nav";
-import Script from "next/script";
 import { AuthProvider } from "./Providers";
-import { useSession } from "next-auth/react";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
 	title: "Create Next App",
@@ -13,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<Script type="text/javascript" src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_API_KEY}&autoload=false`} />
+			
 			<body className={inter.className}>
 				<AuthProvider>
 						<Nav ></Nav>

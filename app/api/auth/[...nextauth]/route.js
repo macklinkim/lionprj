@@ -3,7 +3,7 @@ import User from "@/models/User";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-
+import GoogleProvider from 'next-auth/providers/google';
 export const authOptions = {
 	providers: [
 		CredentialsProvider({
@@ -26,11 +26,39 @@ export const authOptions = {
 					console.log("Error: ", error);
 				}
 			},
+			callbacks: {
+				async signIn({ user, account, profile, email, credentials }) {
+					console.log("inside signIn", session, token, user);
+					const isAllowedToSignIn = true;
+					if (isAllowedToSignIn) {
+						return true;
+					} else {
+						alert("로그인 실패");
+						return false;
+					}
+				},
+				async jwt({ token, account, profile }) {
+					console.log("inside jwt", session, token, user);
+					if (account) {
+						token.accessToken = account.access_token;
+						token.id = profile.id;
+					}
+					return token;
+				},
+				async session({ session, token, user }) {
+					console.log("inside session", session, token, user);
+					session.accessToken = token.accessToken;
+					session.user = user;
+					return session;
+				},
+			},
 		}),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    })
 	],
-	session: {
-		strategy: "jwt",
-	},
+
 	secret: process.env.NEXTAUTH_SECRET,
 	pages: {
 		signIn: "/",

@@ -6,7 +6,8 @@ export async function POST(req) {
   try {
     await connectToDB();
     const {email} = await req.json();
-    const user = await User.findOne({email});
+    const user = await User.findOne({_id});
+    console.log(user);
     return NextResponse.json({user});
   } catch (error) {
     console.log(error);

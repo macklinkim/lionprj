@@ -12,24 +12,27 @@ const links = [
 	},
 	{
 		id: 2,
-		title: "게시판",
-		url: "/board",
+    title: "shopping",
+		url: "/shopping",
+		
 	},
 	{
 		id: 3,
-		title: "About",
-		url: "/about",
+    title: "게시판",
+		url: "/board",
+		
 	},
 	{
 		id: 4,
-		title: "Contact",
-		url: "/contact",
+    title: "About",
+		url: "/about",
+		
 	},
 	{
 		id: 5,
-		title: "shopping",
-		url: "/shopping",
-	},
+		title: "Contact",
+		url: "/contact",
+	}
 ];
 function Nav() {
 	const logout = () => {
