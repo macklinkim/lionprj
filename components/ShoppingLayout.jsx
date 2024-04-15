@@ -1,16 +1,13 @@
 /* eslint-disable @next/next/no-async-client-component */
 /* eslint-disable react/jsx-no-undef */
-import { Link } from "react-router-dom";
 import ShoppingCard from "./ShoppingCard";
-// import ShoppingCard from "./ShoppingCard";
-// import axios from "axios";
 
 async function ShoppingLayout() {
 	const getProducts = async () => {
 		//local로 변경
 		try {
 			const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL + "/api/product", {
-				next: { revalidate: process.env.NEXT_PUBLIC_REVALDATE },
+				next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALDATE) },
 			});
 			if (!res) {
 				throw new Error("Failed to fetch products");

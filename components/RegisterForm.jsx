@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { produce } from "immer";
-import { signIn } from "next-auth/react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 const errorStyle = {
 	fontSize: "0.7rem",
