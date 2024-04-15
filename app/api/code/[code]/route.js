@@ -1,14 +1,15 @@
 import { connectToDB } from "@utils/database";
-import User from "@models/User";
 import { NextResponse } from "next/server";
+import Code from "@models/Code";
 
 export async function GET(req, {params}) {
-  const {id} = params;
+  const {code} = params;
+  console.log('code:',code);
   try {
     await connectToDB();
-    const user = await User.findOne({_id:id});
-    // console.log('user:',user);
-    return NextResponse.json({user});
+    const value = await Code.findOne({_id:code});
+    console.log('value:',value);
+    return NextResponse.json(value);
   } catch (error) {
     console.log(error);
   }

@@ -1,16 +1,11 @@
-import React from 'react'
-
-async function getUser() {
-  try {
-    const res = fetch(process.env.NEXT_PUBLIC_URL + "/api/user", {
-      
-    })
-  } catch (error) {
-    
-  }
-  return (
-    <div>getUser</div>
-  )
+async function getUser(id) {
+	try {
+		const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/user/${id}`, {
+			next: { revalidate: +process.env.NEXT_PUBLIC_REVALDATE },
+		});
+		const user = await res.json();
+		return user.user;
+	} catch (error) {}
 }
 
-export default getUser
+export default getUser;

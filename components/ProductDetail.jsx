@@ -2,23 +2,14 @@
 import parse from "html-react-parser";
 import getImages from "@utils/getImages";
 import Image from "next/image";
+import getProducts from "@utils/getProduct";
+import getReply from "@utils/getReply";
+import ReplyForm from "./ReplyForm";
 ProductDetail.propType = {
 	id: String,
 };
-const getProduct = async id => {
-	try {
-		const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/product/${id}`, {
-			next: { revalidate: +process.env.NEXT_PUBLIC_REVALDATE },
-		});
-		const product = await res.json();
-		return product.product;
-	} catch (error) {
-		console.log(error);
-	}
-};
 async function ProductDetail({ id }) {
-	console.log("_id: ", id);
-	const product = await getProduct(id);
+	const product = await getProducts(id);
 	const reactElements = parse(product.content);
 	const images = [];
 	product.mainImages.forEach(async element => {
@@ -28,7 +19,9 @@ async function ProductDetail({ id }) {
 	for (let a of images) {
 		test.push(await getImages(a));
 	}
-	const imageList = images.map((element, index) => <Image key={index} src={test[index]} width={300} height={300} alt="hello" />);
+	const imageList = images.map((element, index) => <Image key={index} src={test[index]} width={300} height={300} alt={element} />);
+  const reply = await	getReply(id);
+  const replyList = reply.map((element, index) => <ReplyForm key={index} reply={element}></ReplyForm>);
 	return (
 		<div className="flex items-center justify-center">
 			<div className="flex flex-col">
@@ -60,6 +53,9 @@ async function ProductDetail({ id }) {
 					<p>상품 소개</p>
 					<div className="grid grid-cols-1 items-center justify-center">{reactElements}</div>
 				</div>
+        <div>
+          {replyList}
+        </div>
 			</div>
 		</div>
 	);
