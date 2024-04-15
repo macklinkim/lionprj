@@ -7,7 +7,7 @@ ProductDetail.propType = {
 };
 const getProduct = async id => {
 	try {
-		const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_URL + `/api/product/${id}`, {
+		const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/product/${id}`, {
 			next: { revalidate: +process.env.NEXT_PUBLIC_REVALDATE },
 		});
 		const product = await res.json();
