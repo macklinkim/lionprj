@@ -13,9 +13,7 @@ export async function PUT(request, { params }) {
 export async function GET(request, { params }) {
 	const { id } = params;
 	await connectToDB();
-	console.log("db id: ", id);
 	const product = await Product.findOne({ _id: id });
-	console.log("db product: ", product);
 	return NextResponse.json({ product }, { status: 200 });
 }
 
