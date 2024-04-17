@@ -1,7 +1,9 @@
 import { connectToDB } from "@utils/database";
 import Reply from "@/models/Reply";
 import { NextResponse } from "next/server";
-export async function GET(request, { params }) {
+import getTimestamp from "@utils/getTimestamp";
+export async function GET(req, { params }) {
+	/* product ID기준으로 reply 가져옵니다. */
 	const { productid } = params;
 	await connectToDB();
 	const replies = await Reply.find({ product_id: productid });
@@ -9,9 +11,43 @@ export async function GET(request, { params }) {
 }
 export async function HEAD(req) {}
 
-export async function POST(req) {}
+export async function POST(req, { params }) {
+	/* product ID기준으로 post */
+	const { content } = await req.json();
+	const { productid } = params;
+	console.log("[API REPLY POST] comment and productId:", content, productid);
+	if (!content) {
+		return NextResponse.json({ error: "Missing content" }, { status: 400 });
+	}
+	try {
+		await connectToDB();
+		const count = await Reply.find();
+		const max = Math.max.apply(
+			null,
+			count.map(r => r._id)
+		);
+		const rating = content.rating ?? 0;
+		const createdAt = await getTimestamp(new Date());
+		const replies = await Reply.create({ _id: max + 1, product_id: productid, content: content.comment, user_id: content.userId, rating: content.rating || rating, createdAt: createdAt });
+		return NextResponse.json({ Message: "success" }, { status: 200 });
+	} catch (error) {
+		return NextResponse.json({ error: error.message }, { status: 500 });
+	}
+}
 
-export async function DELETE(req) {}
+export async function DELETE(req, { params }) {
+	const { productid } = params;
+	console.log("[API REPLY DELETE] replyId:", productid);
+  console.log(typeof productid);
+	try {
+		await connectToDB();
+		const res = await Reply.findByIdAndDelete({ _id: productid });
+		return NextResponse.json({ res: res, Message: "success" }, { status: 200 });
+	} catch (error) {
+		console.log("fetch at deleteReply in api reply delete:", error);
+		return NextResponse.json({ error: error.message }, { status: 500 });
+	}
+}
 
 export async function PATCH(req) {}
 

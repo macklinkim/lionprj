@@ -1,6 +1,11 @@
 import { Schema, model, models } from 'mongoose';
 
 const ReplySchema = new Schema({
+  _id:{
+    type:Number,
+    required:[true, 'ID is required!'],
+    unique:true,
+  },
   content:{
     type:String,
   },
@@ -20,6 +25,7 @@ const ReplySchema = new Schema({
     type:String,
   }
 });
+ReplySchema.set('timestamps', true);
 const Reply = models.Reply || model("Reply", ReplySchema);
 
 export default Reply;

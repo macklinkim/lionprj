@@ -2,10 +2,13 @@ import { Schema, model, models } from "mongoose";
 
 const ProductSchema = new Schema({
   _id:{
-    type:Number
+    type:Number,
+    required: [true, "ID is required!"],
+    unique:true,
   },
 	name: {
 		type: String,
+    required: [true, "Name is required!"],
 	},
 	active: {
 		type: Boolean,
@@ -41,7 +44,7 @@ const ProductSchema = new Schema({
 		type: String,
 	},
 });
-
+ProductSchema.set('timestamps', true);
 const ProductModel = models.product || model("product", ProductSchema);
 
 export default ProductModel;

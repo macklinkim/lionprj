@@ -26,21 +26,19 @@ function RegisterForm() {
     let str = JSON.stringify(obj, function(key, value) {
       if (typeof value === "object" && value !== null) {
         if (cache.indexOf(value) !== -1) {
-          // Circular reference found, discard key
           return;
         }
-        // Store value in our collection
         cache.push(value);
       }
       return value;
     });
-    cache = null; // reset the cache
+    cache = null;
     return str;
   }
 	const onSubmit = async formData => {
 		let newFormData = {};
 		if (formData.password1 !== formData.password2) {
-			alert("확인 비밀번호가 다르다");
+			alert("확인 비밀번호가 다릅니다.");
 			return;
 		} else {
 			newFormData = produce(formData, draft => {
@@ -50,7 +48,6 @@ function RegisterForm() {
 				draft.phone = "010" + formData.phone;
 			});
 		}
-		//todo:추후 axios로 변경할것
 		try {
 			const resUserExists = await fetch("api/userExists", {
 				method: "POST",

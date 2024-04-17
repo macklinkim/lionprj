@@ -9,16 +9,18 @@ export const authOptions = {
 		CredentialsProvider({
 			name: "credentials",
 			credentials: {},
-			async authorize(credentials) {
+			async authorize(credentials, req) {
 				const { email, password } = credentials;
 				try {
 					await connectToDB();
 					const user = await User.findOne({ email });
 					if (!user) {
+            console.log("user not found");
 						return null;
 					}
 					const passwordsMatch = await bcrypt.compare(password, user.password);
 					if (!passwordsMatch) {
+            console.log("passwordsMatch:", passwordsMatch);
 						return null;
 					}
 					return user;
@@ -26,39 +28,44 @@ export const authOptions = {
 					console.log("Error: ", error);
 				}
 			},
-			callbacks: {
-				async signIn({ user, account, profile, email, credentials }) {
-					console.log("inside signIn", session, token, user);
-					const isAllowedToSignIn = true;
-					if (isAllowedToSignIn) {
-						return true;
-					} else {
-						alert("로그인 실패");
-						return false;
-					}
-				},
-				async jwt({ token, account, profile }) {
-					console.log("inside jwt", session, token, user);
-					if (account) {
-						token.accessToken = account.access_token;
-						token.id = profile.id;
-					}
-					return token;
-				},
-				async session({ session, token, user }) {
-					console.log("inside session", session, token, user);
-					session.accessToken = token.accessToken;
-					session.user = user;
-					return session;
-				},
-			},
+			
 		}),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     })
 	],
+  callbacks: {
 
+    // async signIn({ user, account, profile, email, credentials }) {
+    async signIn() {
+      // console.log("inside signIn", user);
+      const isAllowedToSignIn = true;
+      if (isAllowedToSignIn) {
+        return true;
+      } else {
+        alert("로그인 실패");
+        return false;
+      }
+    },
+    async jwt({ token, account, profile }) {
+
+      // console.log("inside jwt token", token);
+      // console.log("inside jwt account", account);
+      // console.log("inside jwt profile", profile);
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    async session({ session, token}) {
+      // console.log("inside session session:", session);
+      // console.log("inside session token:", token);
+      session.accessToken = token.accessToken;
+      
+      return {...session, userId: token.sub};
+    },
+  },
 	secret: process.env.NEXTAUTH_SECRET,
 	pages: {
 		signIn: "/",
