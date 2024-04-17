@@ -7,7 +7,7 @@ const errorStyle = {
 	fontSize: "0.7rem",
 	color: "red",
 };
-function RegisterForm() {
+function RegisteUserForm() {
 	const router = useRouter();
 	const [srvError, setSrvError] = useState();
 	const {
@@ -179,4 +179,4 @@ function RegisterForm() {
 	);
 }
 
-export default RegisterForm;
+export default RegisteUserForm;

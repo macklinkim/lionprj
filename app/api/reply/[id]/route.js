@@ -2,6 +2,7 @@ import { connectToDB } from "@utils/database";
 import Reply from "@/models/Reply";
 import { NextResponse } from "next/server";
 import getTimestamp from "@utils/getTimestamp";
+import MaxValue from "@models/MaxValue";
 export async function GET(req, { params }) {
 	/* product ID기준으로 reply 가져옵니다. */
 	const { id } = params;
@@ -20,15 +21,25 @@ export async function POST(req, { params }) {
 		return NextResponse.json({ error: "Missing content" }, { status: 400 });
 	}
 	try {
-		await connectToDB();
-		const count = await Reply.find();
-		const max = Math.max.apply(
-			null,
-			count.map(r => r._id)
-		);
+    await connectToDB();
+    let max = 0;
+		let data = await MaxValue.findOne({collectionName: "Reply"});
+    if(!data){
+      const count = await Reply.find();
+      max = await Math.max.apply(
+        null,
+        count.map(r => r._id)
+      );
+      await MaxValue.create({collectionName: "Reply", maxValue: max});
+    }else{
+      console.log(data);
+      max = data.maxValue;
+    }
+    await MaxValue.findOneAndUpdate({collectionName: "Reply"}, {maxValue: max+1});
 		const rating = content.rating ?? 0;
 		const createdAt = await getTimestamp(new Date());
 		const replies = await Reply.create({ _id: max + 1, product_id: id, content: content.comment, user_id: content.userId, rating: content.rating || rating, createdAt: createdAt });
+    // console.log("replies in api reply post:", replies);
 		return NextResponse.json({ Message: "success" }, { status: 200 });
 	} catch (error) {
 		return NextResponse.json({ error: error.message }, { status: 500 });

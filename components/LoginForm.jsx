@@ -13,8 +13,8 @@ function LoginForm() {
 		setError,
 	} = useForm({
 		values: {
-			email: "test@test.com",
-			password: "123123123",
+			email: "s2@market.com",
+			password: "11111111",
 		},
 	});
 	const router = useRouter();
@@ -26,13 +26,7 @@ function LoginForm() {
         callbackUrl: "/",
       });
 		} catch (err) {
-			if (err.response?.data.errors) {
-				// API 서버가 응답한 에러
-				err.response?.data.errors.forEach(error => setError(error.path, { message: error.msg }));
-        window.alert(err.response?.data.errors[0].msg);
-			} else if (err.response?.data.message) {
-				window.alert(err.response?.data.message);
-			}
+
 		}
 	};
 	return (
