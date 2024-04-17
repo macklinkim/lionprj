@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 import getTimestamp from "@utils/getTimestamp";
 export async function GET(req, { params }) {
 	/* product ID기준으로 reply 가져옵니다. */
-	const { productid } = params;
+	const { id } = params;
 	await connectToDB();
-	const replies = await Reply.find({ product_id: productid });
+	const replies = await Reply.find({ product_id: id });
 	return NextResponse.json({ replies }, { status: 200 });
 }
 export async function HEAD(req) {}
@@ -14,8 +14,8 @@ export async function HEAD(req) {}
 export async function POST(req, { params }) {
 	/* product ID기준으로 post */
 	const { content } = await req.json();
-	const { productid } = params;
-	console.log("[API REPLY POST] comment and productId:", content, productid);
+	const { id } = params;
+	console.log("[API REPLY POST] comment and productId:", content, id);
 	if (!content) {
 		return NextResponse.json({ error: "Missing content" }, { status: 400 });
 	}
@@ -28,7 +28,7 @@ export async function POST(req, { params }) {
 		);
 		const rating = content.rating ?? 0;
 		const createdAt = await getTimestamp(new Date());
-		const replies = await Reply.create({ _id: max + 1, product_id: productid, content: content.comment, user_id: content.userId, rating: content.rating || rating, createdAt: createdAt });
+		const replies = await Reply.create({ _id: max + 1, product_id: id, content: content.comment, user_id: content.userId, rating: content.rating || rating, createdAt: createdAt });
 		return NextResponse.json({ Message: "success" }, { status: 200 });
 	} catch (error) {
 		return NextResponse.json({ error: error.message }, { status: 500 });
@@ -36,13 +36,13 @@ export async function POST(req, { params }) {
 }
 
 export async function DELETE(req, { params }) {
-	const { productid } = params;
-	console.log("[API REPLY DELETE] replyId:", productid);
-  console.log(typeof productid);
+	const { id } = params;
+	console.log("[API REPLY DELETE] replyId:", id);
 	try {
 		await connectToDB();
-		const res = await Reply.findByIdAndDelete({ _id: productid });
-		return NextResponse.json({ res: res, Message: "success" }, { status: 200 });
+		const res = await Reply.deleteOne({ _id: id } );
+    console.log("deleteReply in api reply delete:", res);
+		return NextResponse.json({ res }, { status: 200 });
 	} catch (error) {
 		console.log("fetch at deleteReply in api reply delete:", error);
 		return NextResponse.json({ error: error.message }, { status: 500 });
