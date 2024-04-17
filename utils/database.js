@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-
+// import autoIncrement from "mongoose-auto-increment";
+// autoIncrement.initialize(mongoose.connection);
 let isConnected = false; // track the connection
 
 export const connectToDB = async () => {

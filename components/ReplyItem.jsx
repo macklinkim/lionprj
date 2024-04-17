@@ -9,16 +9,16 @@ ReplyItem.propTypes = {
 };
 function ReplyItem({ replyItem }) {
 	const { data: session } = useSession();
-	console.log("replyItem:", replyItem);
-	console.log("session:", session?.userId);
+	// console.log("replyItem:", replyItem);
+	// console.log("session:", session?.userId);
   
 	async function deleteReply() {
 		try {
-			console.log(process.env.NEXT_PUBLIC_URL + `/api/reply/${replyItem.reply_id}`);
+			// console.log(process.env.NEXT_PUBLIC_URL + `/api/reply/${replyItem.reply_id}`);
 			const res = fetch(process.env.NEXT_PUBLIC_URL + `/api/reply/${replyItem.reply_id}`, {
 				method: "DELETE",
 			});
-      
+      // console.log('[ReplyItem component]res:', res);
 			return res;
 		} catch (error) {
 			console.log("fetch at deleteReply in ReplyForm:", error);
