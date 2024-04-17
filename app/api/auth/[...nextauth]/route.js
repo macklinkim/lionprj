@@ -4,6 +4,7 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import GoogleProvider from 'next-auth/providers/google';
+import getUser from "@utils/getUser";
 export const authOptions = {
 	providers: [
 		CredentialsProvider({
@@ -37,8 +38,8 @@ export const authOptions = {
 	],
   callbacks: {
 
-    // async signIn({ user, account, profile, email, credentials }) {
-    async signIn() {
+    async signIn({ user, account, profile, email, credentials }) {
+    // async signIn(user) {
       // console.log("inside signIn", user);
       const isAllowedToSignIn = true;
       if (isAllowedToSignIn) {
@@ -61,9 +62,10 @@ export const authOptions = {
     async session({ session, token}) {
       // console.log("inside session session:", session);
       // console.log("inside session token:", token);
+      const userLogin = await getUser(token.sub);
+      // console.log("userLogin:", userLogin);
       session.accessToken = token.accessToken;
-      
-      return {...session, userId: token.sub};
+      return {...session, userId: token.sub, userType: userLogin.type};
     },
   },
 	secret: process.env.NEXTAUTH_SECRET,

@@ -55,6 +55,8 @@ async function ProductDetail({ id }) {
 					<p>상품 소개</p>
 					<div className="grid grid-cols-1 items-center justify-center">{reactElements}</div>
 				</div>
+        <br></br>
+        <br></br>
         <div>
           {replyList}
         </div>
