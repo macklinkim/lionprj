@@ -8,6 +8,7 @@ function LoginForm() {
 	const {
 		register,
 		handleSubmit,
+    watch,
 		formState: { errors },
 		setError,
 	} = useForm({
@@ -22,8 +23,8 @@ function LoginForm() {
 			await signIn("credentials", {
 				...formData,
 				redirect: true,
-        callbackUrl:'/about'
-			});
+        callbackUrl: "/",
+      });
 		} catch (err) {
 			if (err.response?.data.errors) {
 				// API 서버가 응답한 에러
@@ -79,7 +80,7 @@ function LoginForm() {
 							비밀번호를 잊으셨나요?
 						</Link>
 					</div>
-					<div className="mt-14 flex justify-center items-center">
+					<div className="mt-4 flex justify-center items-center">
 						<button className="dark:bg-gray-700 border rounded-lg p-3 ml-8 text-blue-500 hover:underline" type="submit">
 							로그인
 						</button>

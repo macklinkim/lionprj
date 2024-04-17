@@ -1,10 +1,10 @@
 import React from 'react'
-import ShoppingLayout from './../../components/ShoppingLayout';
+import ShoppingForm from '../../components/ShoppingForm';
 
 function Shopping() {
   return (
     <div>
-      <ShoppingLayout></ShoppingLayout>
+      <ShoppingForm></ShoppingForm>
     </div>
   )
 }

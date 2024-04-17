@@ -4,13 +4,14 @@ import getImages from "@utils/getImages";
 import Image from "next/image";
 import getProducts from "@utils/getProduct";
 import getReply from "@utils/getReply";
-import ReplyForm from "./ReplyForm";
+import ReplyForm from "@components/ReplyForm";
+import AddReply from "@components/AddReply";
 ProductDetail.propType = {
 	id: String,
 };
 async function ProductDetail({ id }) {
 	const product = await getProducts(id);
-	const reactElements = parse(product.content);
+	const reactElements = parse(product?.content);
 	const images = [];
 	product.mainImages.forEach(async element => {
 		images.push(element.fileName);
@@ -21,6 +22,7 @@ async function ProductDetail({ id }) {
 	}
 	const imageList = images.map((element, index) => <Image key={index} src={test[index]} width={300} height={300} alt={element} />);
   const reply = await	getReply(id);
+  // console.log('reply:',reply);
   const replyList = reply.map((element, index) => <ReplyForm key={index} reply={element}></ReplyForm>);
 	return (
 		<div className="flex items-center justify-center">
@@ -56,6 +58,8 @@ async function ProductDetail({ id }) {
         <div>
           {replyList}
         </div>
+        {/* {session&&} */}
+        <AddReply productId={id}></AddReply>
 			</div>
 		</div>
 	);

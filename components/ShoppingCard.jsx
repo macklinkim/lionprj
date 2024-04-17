@@ -17,7 +17,8 @@ async function ShoppingCard({ item }) {
 					<div>{item.price}</div>
 				</Link>
 			)}
-      {/* {replylist && 'dsffsd'} */}
+      
+      
 		</div>
 	);
 }
