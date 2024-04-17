@@ -1,12 +1,11 @@
-import ImageUpload from '@components/ImageUpload'
-import React from 'react'
+import ImageUpload from "@components/ImageUpload";
 
 function Upload() {
-  return (
-    <>
-    <ImageUpload/>
-    </>
-  )
+	return (
+		<>
+			<ImageUpload />
+		</>
+	);
 }
 
-export default Upload
+export default Upload;
