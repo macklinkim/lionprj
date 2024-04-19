@@ -23,6 +23,16 @@ export default function UserInfo() {
 				>
 					내 상품 보기/등록
 				</Link>
+        <Link
+					href={{
+						pathname: "/cart",
+						query: { userId: session?.userId },
+            
+					}}
+          as={`/cart`}
+				>
+					장바구니
+				</Link>
 				<button onClick={() => signOut()} className="bg-red-500 text-white font-bold px-6 py-2 mt-3">
 					로그아웃
 				</button>
