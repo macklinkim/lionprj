@@ -5,7 +5,7 @@ import Button from "@components/Button";
 import ImageUpload from "./ImageUpload";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-function RegisterProductForm() {
+function ProductRegisterForm() {
 	const { data: session } = useSession();
 	const [filename, setFilename] = useState([]);
 	const router = useRouter();
@@ -31,7 +31,7 @@ function RegisterProductForm() {
 				},
 				body: JSON.stringify({ ...formData, seller_id: session.userId, filename: filename }),
 			});
-			console.log("[RegisterProductForm] res:", res);
+			console.log("[ProductRegisterForm] res:", res);
 			if (res.status === 200&&
       res.url.endsWith("/api/product")) {
 				alert("상품등록에 성공했습니다.");
@@ -44,7 +44,7 @@ function RegisterProductForm() {
 
 	return (
 		<div className="flex flex-col gap-3">
-			<div>RegisterProductForm</div>
+			<div>ProductRegisterForm</div>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className="grid grid-cols-4">
 					<label className="col-span-1" htmlFor="name">
@@ -119,4 +119,4 @@ function RegisterProductForm() {
 	);
 }
 
-export default RegisterProductForm;
+export default ProductRegisterForm;
