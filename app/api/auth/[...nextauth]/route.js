@@ -65,6 +65,8 @@ export const authOptions = {
       const userLogin = await getUser(token.sub);
       // console.log("userLogin:", userLogin);
       session.accessToken = token.accessToken;
+      session.user.userId = token.sub;
+      session.user.userType =  userLogin.type;
       return {...session, userId: token.sub, userType: userLogin.type};
     },
   },

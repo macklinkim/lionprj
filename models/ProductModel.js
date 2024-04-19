@@ -43,7 +43,7 @@ const ProductSchema = new Schema({
 	updatedAt: {
 		type: String,
 	},
-});
+},{_id:false});
 ProductSchema.set("timestamps", true);
 const ProductModel = models.product || model("product", ProductSchema);
 export default ProductModel;

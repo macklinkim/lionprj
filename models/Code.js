@@ -10,7 +10,7 @@ _id:{
   codes:{
     type:Array,
   },
-});
+},{_id:false});
 const Code = models.Code || model("Code", CodeSchema);
 
 export default Code;
