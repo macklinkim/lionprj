@@ -35,15 +35,12 @@ const links = [
 	// }
 ];
 function Nav() {
-	const logout = () => {
-		console.log("logout");
-	};
 	const { data: session } = useSession();
 	return (
 		<div className="flex justify-between mb-1 pt-3 items-start">
       <div className="w-24" >{''}</div>
 			<Link href="/" className="flex gap-2 flex-center">
-				<Image src="/assets/images/next.svg" alt="logo" width={30} height={30} className="object-contain" />
+				<Image src="/assets/images/next.svg" alt="logo" width={30} height={30} className="object-contain w-10 h-10" />
 				<p className="logo_text">Lion ShoppingMall</p>
 			</Link>
 			<div className="flex gap-5">

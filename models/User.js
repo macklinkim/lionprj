@@ -34,7 +34,7 @@ const UserSchema = new Schema({
   image: {
     type: String,
   }
-});
+},{_id:false});
 UserSchema.set('timestamps', true);
 const User = models.User || model("User", UserSchema);
 

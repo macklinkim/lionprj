@@ -24,7 +24,7 @@ const ReplySchema = new Schema({
   createdAt:{
     type:String,
   }
-});
+},{_id:false});
 ReplySchema.set('timestamps', true);
 const Reply = models.Reply || model("Reply", ReplySchema);
 

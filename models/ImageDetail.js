@@ -9,7 +9,7 @@ const ImageDetailSchema = new Schema({
     type:String,
     required: [true, 'filename is required!'],
   }
-});
+},{_id:false});
 
 const ImageDetail = models.ImageDetail || model("ImageDetail", ImageDetailSchema);
 

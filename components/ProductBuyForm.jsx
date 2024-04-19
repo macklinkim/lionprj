@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import Button from "./Button";
-import PropType from "prop-types";
-import { useRouter } from 'next/navigation'
-ProductBuyForm.propType = {
-  productId: PropType.number,
-}
-function ProductBuyForm({productId}) {
-  const router = useRouter();
+function ProductBuyForm() {
 	return (
 		<div>
 			<form >
@@ -16,9 +9,6 @@ function ProductBuyForm({productId}) {
 					<div className="flex justify-center w-fit">
 						<input className="w-10 text-right" type="number" id="quantity" name="quantity" placeholder="0" />개
 					</div>
-					<Button type="button" onClick={() =>router.push(`/order/${productId}`)}>
-						구매하기
-					</Button>
 				</div>
 			</form>
 		</div>
