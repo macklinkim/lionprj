@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import CartItem from "@/components/CartItem";
 import getProducts from "@utils/getProduct";
@@ -9,70 +10,35 @@ CartForm.propType = {
 	productid: PropTypes.number,
 };
 let totalOrder = [];
-async function CartForm({ result, productid }) {
-	// console.log("[CartForm] result:", result);
-	// console.log("[CartForm] productid:", productid);
-	const user = result?.user;
-	let message = "";
-	const addCart = async () => {
-		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/cart`, {
-				method: "POST",
-				body: JSON.stringify({ product_id: productid, user_id: user._id }),
-			});
-			const result = await res.json();
-			// console.log("[CartForm] result:", result);
-			return result;
-		} catch (error) {
-			console.log("[CartForm] error:", error);
-		}
-	};
-	const getCart = async () => {
-		try {
-			// console.log(process.env.NEXT_PUBLIC_URL + `/api/cart/${user._id}`);
-			const res2 = await fetch(process.env.NEXT_PUBLIC_URL + `/api/cart/${user._id}`, {
-				method: "GET",
-				next: { revalidate: 300 },
-			});
-			const data = await res2.json();
-			// console.log("[CartForm] data:", data);
-			return data;
-		} catch (error) {
-      console.log("[CartForm] error:", error);
-    }
-	};
-	//제품 정보 받아오기 이미지 조립
-	if (productid) {
-		message = await addCart();
-	}
-	// console.log("[CartForm] message:", message);
-	const cartProductList = await getCart();
-	// console.log("[CartForm] cartProductList:", cartProductList);
-	//카트 리스트를 가져오고 상품 리스트로 변경
-	const aList = [];
-	if (cartProductList) {
-		for (let aProduct of cartProductList) {
-			const product = await getProducts(aProduct.product_id);
-			const file = aList.push({ ...product });
-		}
-	}
-
-	const cartItemList = aList.map(item => <CartItem key={item._id} item={item} ></CartItem>);
+function CartForm({ result, productid }) {
+	console.log("[CartForm] result:", result);
+  const itemList = result?.map(item => <CartItem key={item._id} item={item}></CartItem>)
 	return (
-		<div className="w-full">
-			{/* {message && <div> {message.message} </div>} */}
-			<div className="grid grid-cols-12">
-				<div className="col-span-2 text-center">사진</div>
-				<div className="col-span-4 text-center">상품명</div>
-				<div className="col-span-2 text-center">가격</div>
-				<div className="col-span-2 text-center">배송비</div>
-				<div className="col-span-1 text-center">갯수</div>
-				<div className="col-span-1 text-center">총액</div>
-			</div>
-			{cartItemList}
-
-      
-		</div>
+		<section className="p-4 ">
+			<table className="border-collapse table-fixed">
+				<colgroup>
+        <col className="w-[50%] sm:w-[30%]" />
+            <col className="w-[25%] sm:w-[15%]" />
+            <col className="w-[25%] sm:w-[15%]" />
+            <col className="w-0 sm:w-[10%]" />
+            <col className="w-0 sm:w-[20%]" />
+            <col className="w-0 sm:w-[10%]" />
+				</colgroup>
+				<thead>
+					<tr className="border-b text-center border-solid border-gray-200">
+						<th className="p-2 text-center ">상품명</th>
+						<th className="p-2 text-center ">상품가격</th>
+						<th className="p-2 text-center ">배송비</th>
+						<th className="p-2 text-center hidden sm:table-cell">갯수</th>
+						<th className="p-2 text-center hidden sm:table-cell">총액</th>
+						<th className="p-2 text-center hidden sm:table-cell">삭제</th>
+					</tr>
+				</thead>
+				<tbody className="w-full">
+          {itemList}
+          </tbody>
+			</table>
+		</section>
 	);
 }
 

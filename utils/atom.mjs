@@ -11,3 +11,8 @@ export const saveCart = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
+export const userId = atom({
+  key: 'userId',
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
