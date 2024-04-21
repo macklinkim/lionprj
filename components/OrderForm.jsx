@@ -2,6 +2,7 @@ import PropType from "prop-types";
 import getProducts from "@utils/getProduct";
 import Image from "next/image";
 import Button from "./Button";
+import Link from "next/link";
 OrderForm.propType = {
 	productid: PropType.number,
 };
@@ -16,6 +17,7 @@ async function OrderForm({ productid }) {
 	const product = await getProducts(i);
 	console.log("[OrderForm] product:", product);
 	const totalPrice = product.price * q + product.shippingFees;
+
 	return (
 		<div className="flex flex-col items-center justify-center">
 			<div className="text-3xl">상품 주문하기</div>
@@ -30,13 +32,12 @@ async function OrderForm({ productid }) {
 					<div>총액 : {totalPrice}</div>
 				</div>
 				<div>
-					<div>
-						주소:
-						<input type="text" />
-					</div>
 				</div>
 				<div>
-					<Button type="button">주문하기</Button>
+          <Link prefetch={false} href={{
+            pathname: `/order/finish`,
+            query: { productId, totalPrice: totalPrice },
+          }} > 완료 </Link>
 				</div>
 			</div>
 		</div>

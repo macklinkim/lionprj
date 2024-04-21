@@ -37,12 +37,11 @@ async function CartForm({ result, productid }) {
 			const data = await res2.json();
 			// console.log("[CartForm] data:", data);
 			return data;
-		} catch (error) {}
+		} catch (error) {
+      console.log("[CartForm] error:", error);
+    }
 	};
 	//제품 정보 받아오기 이미지 조립
-	try {
-	} catch (error) {}
-
 	if (productid) {
 		message = await addCart();
 	}
@@ -57,13 +56,8 @@ async function CartForm({ result, productid }) {
 			const file = aList.push({ ...product });
 		}
 	}
-	const myfun = async ({ productId, quantity }) => {
-		"use server";
-		console.log("myfun", productId, quantity);
-		totalOrder = { productId, quantity };
-		console.log("totalOrder", totalOrder);
-	};
-	const cartItemList = aList.map(item => <CartItem key={item._id} item={item} myFun={myfun}></CartItem>);
+
+	const cartItemList = aList.map(item => <CartItem key={item._id} item={item} ></CartItem>);
 	return (
 		<div className="w-full">
 			{/* {message && <div> {message.message} </div>} */}

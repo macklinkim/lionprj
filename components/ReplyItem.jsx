@@ -25,19 +25,19 @@ function ReplyItem({ replyItem }) {
 		}
 	}
 	return (
-		<div className="grid grid-cols-4">
-			<div>{replyItem.userName}</div>
-			<div> {replyItem.values}</div>
-			<div> {replyItem.content}</div>
-			<div className="flex items-center justify-between text-sm">
-				<div> {replyItem.createdAt}</div>
+		<tr>
+			<td>{replyItem.userName}</td>
+			<td className="p-2 text-center hidden sm:table-cell"> {replyItem.values}</td>
+			<td> {replyItem.content}</td>
+			<td className="flex items-center justify-between text-sm">
+				<div className="p-2 text-center hidden sm:table-cell"> {replyItem.createdAt}</div>
 				{session?.userId == replyItem?.user_id ? (
 					<Button type="button" size="xs" onClick={deleteReply}>
 						삭제
 					</Button>
 				) : null}
-			</div>
-		</div>
+			</td>
+		</tr>
 	);
 }
 
