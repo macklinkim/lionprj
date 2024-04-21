@@ -1,4 +1,3 @@
-
 async function getImages(filename) {
 	if (Array.isArray(filename)) {
 		const imageFiles = [];
@@ -20,6 +19,7 @@ async function getImages(filename) {
 				cache: "force-cache",
 			});
 			const pos = await res.json();
+      
 			return pos.image;
 		} catch (error) {
 			console.log(error);

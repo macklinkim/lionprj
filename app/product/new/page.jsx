@@ -1,10 +1,10 @@
-import RegisterProductForm from '@components/RegisterProductForm'
+import ProductRegisterForm from '@components/ProductRegisterForm'
 import React from 'react'
 
 function ProductNew() {
   return (
     <div className='w-full flex flex-col items-center justify-center'>
-      <RegisterProductForm></RegisterProductForm>
+      <ProductRegisterForm></ProductRegisterForm>
     </div>
   )
 }

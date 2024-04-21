@@ -22,6 +22,7 @@ async function ProductCard({ item, isMyProduct }) {
 	// 	// const image = getImages(item.mainImages[0].fileName);
 	//   test();
 	// }, []);
+
 	let image = null;
 	if (!isMyProduct) {
 		image = await getImages(item.mainImages[0].fileName);
