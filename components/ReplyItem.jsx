@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import PropTypes from "prop-types";
 import Button from "./Button";
+import { useEffect, useState } from "react";
 
 ReplyItem.propTypes = {
 	replyItem: PropTypes.object.isRequired,
@@ -9,16 +10,40 @@ ReplyItem.propTypes = {
 };
 function ReplyItem({ replyItem }) {
 	const { data: session } = useSession();
-	// console.log("replyItem:", replyItem);
-	// console.log("session:", session?.userId);
-  
+	const [userInfo, setUserInfo] = useState();
+	const [membershipClass, setMembershipClass] = useState();
+	console.log("session:", session);
+	const getUser = async () => {
+		try {
+			const res = await fetch(`/api/user/${replyItem.user_id}`);
+			const data = await res.json();
+			setUserInfo(data.user);
+		} catch (error) {
+		}
+	};
+	const getCode = async () => {
+		try {
+			const res = await fetch(`/api/code/membershipClass`);
+			const data = await res.json();
+			data.codes.map(item => {
+				if (item.code == userInfo?.extra?.membershipClass) {
+					setMembershipClass(item.value);
+				}
+			});
+		} catch (error) {
+			console.log("[ReplyItem component]error:", error);
+		}
+	};
+	useEffect(() => {
+		getUser();
+		getCode();
+	}, []);
+
 	async function deleteReply() {
 		try {
-			// console.log(process.env.NEXT_PUBLIC_URL + `/api/reply/${replyItem.reply_id}`);
 			const res = fetch(process.env.NEXT_PUBLIC_URL + `/api/reply/${replyItem.reply_id}`, {
 				method: "DELETE",
 			});
-      // console.log('[ReplyItem component]res:', res);
 			return res;
 		} catch (error) {
 			console.log("fetch at deleteReply in ReplyForm:", error);
@@ -26,8 +51,8 @@ function ReplyItem({ replyItem }) {
 	}
 	return (
 		<tr>
-			<td>{replyItem.userName}</td>
-			<td className="p-2 text-center hidden sm:table-cell"> {replyItem.values}</td>
+			<td>{userInfo.name||session.user.name}</td>
+			<td className="p-2 text-center text-[10px] hidden sm:table-cell">{membershipClass}</td>
 			<td> {replyItem.content}</td>
 			<td className="flex items-center justify-between text-sm">
 				<div className="p-2 text-center hidden sm:table-cell"> {replyItem.createdAt}</div>

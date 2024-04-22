@@ -14,9 +14,9 @@ function Post({ params }) {
 	console.log("[PostDetail page] id:", id);
 	const getPostDetail = async () => {
 		try {
-			const res = await fetch(`/api/post/${id}`,{
-        next: { revalidate: 60 },
-      });
+			const res = await fetch(`/api/post/${id}`, {
+				next: { revalidate: 60 },
+			});
 			const data = await res.json();
 			console.log("[PostDetail page] data:", data.res);
 			setPostDetail(data.res);
@@ -25,7 +25,7 @@ function Post({ params }) {
 			console.log("[PostDetail page] error:", error);
 		}
 	};
-	
+
 	const deletePost = async () => {
 		try {
 			const res = await fetch(`/api/post/${id}`, {
@@ -54,6 +54,8 @@ function Post({ params }) {
 				<section className="mb-8 p-4">
 					<div className="flex items-center justify-between">
 						<div className="font-semibold text-xl">제목 : {postDetail.title}</div>
+					</div>
+					<div>
 						<div className="text-right text-gray-800">작성자 : {postDetail.user.name}</div>
 						<div className="text-right text-gray-800"> 작성일 : {date}</div>
 					</div>
