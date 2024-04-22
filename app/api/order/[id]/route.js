@@ -9,8 +9,8 @@ export async function POST(req, { params }) {
 	const { id } = params;
 	const userId = id;
   console.log("[API ORDER POST] userId:", userId);
-	const { productId, quantity } = await req.json();
-	console.log("[API ORDER POST]req:", productId, quantity);
+	const { productId, quantity, address } = await req.json();
+	console.log("[API ORDER POST]req:", productId, quantity, address);
 	try {
 		await connectToDB();
 		const { _id, no } = await Seq.findOne({ _id: "order" });
@@ -27,12 +27,11 @@ export async function POST(req, { params }) {
 		const cost = { products: total, shippingFees: aProduct.shippingFees, total: totalOrd };
 		console.log("[API ORDER POST] cost:", cost);
 		const user = await User.findOne({ _id: userId });
-    const userAddress = user.address;
-		const address = { name: "집", value: userAddress };
+		const addressObj = { name: "집", value: address };
     const rand = Math.floor(Math.random() * 1000000000);
 		const delivery = { company: "CJ대한통운", trackingNumber: rand, url: "https://trace.cjlogistics.com/next/tracking.html?wblNo=" };
 		console.log({ _id: no + 1, user_id: Number(id), state: "OS020", products: aProduct, address: address, cost: cost, delivery: delivery });
-		const res = await Order.create({ _id: no + 1, user_id: id, state: "OS020", products: aProduct, address: address, cost: cost, delivery: delivery });
+		const res = await Order.create({ _id: no + 1, user_id: id, state: "OS020", products: aProduct, address: addressObj, cost: cost, delivery: delivery });
 		if (res) await Seq.updateOne({ _id: "order" }, { $inc: { no: 1 } });
 		console.log("[API ORDER POST]responsive:", res);
 		return NextResponse.json({ res }, { status: 200 });

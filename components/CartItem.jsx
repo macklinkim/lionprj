@@ -5,20 +5,26 @@ import Image from "next/image";
 import Button from "./Button";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
-import {saveCart} from "@utils/atom";
+import { saveCart } from "@utils/atom";
 CartItem.propType = {
 	item: PropTypes.object,
-	myFun: PropTypes.func,
+	refreshCart: PropTypes.func,
 };
 
 //총액 계산
 //order 화면으로 가도록
-function CartItem({ item, myFun }) {
+function CartItem({ item, refreshCart }) {
 	const [cart, setCart] = useRecoilState(saveCart);
-	const [quantity, setQuantity] = useState(0);
+	const [quantity, setQuantity] = useState(1);
+  const [fileName, setFileName] = useState();
 	const [product, setProduct] = useState("");
-	const [totalPrice, setTotalPrice] = useState(item.price * 1 + item.shippingFees * 1);
-	console.log("[CartItem] item:", item);
+	const [totalPrice, setTotalPrice] = useState(0);
+  const router = useRouter();
+  if (isNaN(totalPrice)) {
+    console.log("[CartItem] val nan:", totalPrice);
+    setTotalPrice(0);
+  }
+	// console.log("[CartItem] item:", item);
 	const getProduct = async () => {
 		try {
 			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/product/${item.product_id}`, {
@@ -27,37 +33,75 @@ function CartItem({ item, myFun }) {
 			});
 			const data = await res.json();
 			setProduct(data.product);
-      console.log('[CartItem] product:', data.product.mainImages[0]);
+      setFileName('/assets/images/' + data.product.mainImages[0]?.fileName);
+			console.log("[CartItem] product:", data.product.mainImages[0]);
 			return data.product;
 		} catch (error) {
 			console.log("[CartItem] error:", error);
 		}
 	};
-
+	const deleteCartItem = async () => {
+		try {
+			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/cart/${item._id}`, {
+				method: "DELETE",
+			});
+			const result = await res.json();
+			console.log("[CartItem] result:", result);
+			location.reload();
+		} catch (error) {
+			console.log("[CartItem] error:", error);
+		}
+	};
 	useEffect(() => {
-		setTotalPrice(product.price * quantity + product.shippingFees * 1);
+    if (isNaN(totalPrice)) {
+			console.log("[CartItem] val nan:", totalPrice);
+			setTotalPrice(0);
+		}
+		setTotalPrice(quantity === 0 ? 0 : product.price * quantity + product.shippingFees);
 		getProduct(item.product_id);
-    setCart({itemId: item._id, quantity: quantity} );
+		setCart({ itemId: item._id, quantity: quantity });
 	}, [quantity]);
-	const router = useRouter();
-  // const fileName = product?.mainImages[0]?.fileName;
-  
-  const fileName = '/a';
-  // console.log('[CartItem] fileName:', product?.mainImages[0]?.fileName);
+	// const fileName = product?.mainImages[0]?.fileName;
+	const handleQuantity = e => {
+		let val = parseInt(e.target.value, 10);
+		if (isNaN(val)) {
+			console.log("[CartItem] val nan:", val);
+			setTotalPrice(0);
+		} else {
+			setQuantity(e.target.value);
+		}
+	};
+
 	return (
-		<tr className="border-solid border-2 border-sky-500 text-center self-center">
+		<tr className="border-solid border-2  text-center self-center">
+      <td className="self-center"> {!fileName?<div>로딩중</div>:<Image src={fileName} alt="image" width={100} height={100} />}</td>
 			<td className="self-center">{product.name}</td>
 			<td className="self-center">{product.price}</td>
 			<td className="self-center">{product.shippingFees}</td>
 			<td className="self-center">
-				<input className="w-10 border-solid border-2 border-sky-500" type="number" name="quantity" id="quantity" onChange={e => setQuantity(e.target.value)} />
+				<input
+					className="w-10 border-solid border-2"
+					type="number"
+					name="quantity"
+					id="quantity"
+					min="0"
+          value={quantity}
+					onChange={e => {
+						handleQuantity(e);
+					}}
+				/>
 			</td>
 			<td className=" self-center">
-				<input className="w-20 border-solid border-2 border-sky-500" type="text" name="total" id="total" readOnly={true} value={totalPrice} />
+				<input className="w-20 border-solid border-2 " type="text" name="total" id="total" min="0" readOnly={true} value={totalPrice} />
 			</td>
 			<td>
-				<Button size="xs" type="button" onClick={() => router.push(`/order/i${item._id}q${quantity}`)}>
+				<Button size="xs" type="button" onClick={() => router.push(`/order/i${item.product_id}q${quantity}`)}>
 					주문
+				</Button>
+			</td>
+			<td>
+				<Button size="xs" type="button" onClick={() => deleteCartItem()}>
+					삭제
 				</Button>
 			</td>
 		</tr>

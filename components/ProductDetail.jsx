@@ -15,7 +15,8 @@ ProductDetail.propType = {
 };
 async function ProductDetail({ id }) {
 	const product = await getProducts(id);
-	const reactElements = parse(product?.content);
+	const newContent = product?.content.replace(/<img src="\/api\/download/g, `<img src=\"${process.env.NEXT_PUBLIC_URL}/assets/images/`);
+	const reactElements = parse(newContent);
 	const images = [];
 	const session = await getServerSession();
 	// console.log("[ProductDetail] session:", session);
@@ -28,6 +29,7 @@ async function ProductDetail({ id }) {
 		imagesBinaryList.push(await getImages(a));
 	}
 	const imageList = images.map((element, index) => <Image key={index} src={imagesBinaryList[index]} width={300} height={300} alt={element} />);
+
 	const reply = await getReply(id);
 	// console.log('reply:',reply);
 	const replyList = reply.map((element, index) => <ReplyForm key={index} reply={element}></ReplyForm>);
@@ -54,13 +56,14 @@ async function ProductDetail({ id }) {
 							<p>판매자: {product.seller_id}</p>
 						</div>
 						<ProductBuyForm></ProductBuyForm>
-						<Link href={{ pathname: `/cart/${id}`}} >
+						<Link href={{ pathname: `/cart/${id}` }}>
 							<Button>구매하기</Button>
 						</Link>
 					</div>
 				</div>
 				<div>
 					<p>상품 소개</p>
+          <br></br>
 					<div className="grid grid-cols-1 items-center justify-center">{reactElements}</div>
 				</div>
 				<br></br>

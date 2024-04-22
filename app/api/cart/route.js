@@ -4,8 +4,12 @@ import Cart from "@models/Cart";
 import Seq from "@models/Seq";
 
 export async function POST(req) {
+  console.log("[api/cart] POST");
 	const { product_id, user_id } = await req.json();
 	console.log("[api/cart] body:", product_id, user_id);
+  if(!user_id){
+    return NextResponse.json({ message: "user_id is required" }, { status: 500 });
+  }
 	try {
 		await connectToDB();
 		const { _id, no } = await Seq.findOne({ _id: "cart" });

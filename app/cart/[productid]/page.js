@@ -4,22 +4,22 @@ import CartForm from "@components/CartForm";
 import { useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { userId } from "@utils/atom";
+
 function Cart({ params }) {
 	const { productid } = params;
 	const [cartProducts, setCartProducts] = useState("");
 	const { data: session } = useSession();
 	let sessionUserId = session?.user?.userId;
 	const [userId2, setUserId] = useRecoilState(userId);
-	setUserId(session?.user?.userId);
 	// console.log("[Cart] productid, userid:", productid, sessionUserId);
 	//일단 카트에 담고
 	//유저 번호 기준으로 카트 필터링
 	const addCart = async () => {
-		if (!sessionUserId) {
+    if (!sessionUserId) {
 			sessionUserId = userId2;
 		}
 		try {
-			// console.log('[CartForm] addCart userId:', sessionUserId);
+			console.log('[CartForm] addCart userId:', sessionUserId);
 			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/cart/`, {
 				method: "POST",
 				body: JSON.stringify({ product_id: productid, user_id: sessionUserId }),
@@ -30,7 +30,7 @@ function Cart({ params }) {
 			console.log("[CartForm] error:", error);
 		}
 	};
-	const getCart = async () => {
+	const getCart = async (sessionUserId) => {
 		if (!sessionUserId) {
 			sessionUserId = userId2;
 		}
@@ -50,15 +50,18 @@ function Cart({ params }) {
 		}
 	};
 	useEffect(() => {
+    if(!sessionUserId){
+      setUserId(userId2);
+    }
 		addCart();
-		getCart();
+		getCart(sessionUserId);
 	}, []);
 
 	return (
 		<div>
 			<div className="flex flex-col items-center justify-center">
 				<div className="text-6xl">장바구니</div>
-				{cartProducts && <CartForm result={cartProducts} productid={productid}></CartForm>}
+				{cartProducts && <CartForm result={cartProducts}></CartForm>}
 			</div>
 		</div>
 	);

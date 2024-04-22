@@ -8,7 +8,7 @@ export default function UserInfo() {
 	const { data: session } = useSession();
 	const [fold, setFold] = useState(true);
 	return (
-		<div className="bg-gray-200 top-0 left-0 text-sm absolute ">
+		<div className=" top-0 left-0 text-sm absolute dark:bg-gray-600">
 			{fold ? (
 				<div className="shadow-lg p-1 flex flex-col gap-2 my-1">
 					<div>
