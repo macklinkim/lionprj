@@ -20,7 +20,7 @@ function Button({ children, type="button", bgColor='blue', size='md', ...rest })
     lg: 'py-2 px-6 text-lg',
   };
 
-  return <button type={ type } className={`${ btnColor[bgColor] } ${ btnSize[size] } text-white font-semibold ml-1/2 text-base hover:bg-blue-600 rounded`} { ...rest }>{ children }</button>
+  return <button type={ type } className={`${ btnColor[bgColor] } ${ btnSize[size] } text-white ml-1/2 text-base hover:bg-blue-600 rounded`} { ...rest }>{ children }</button>
 }
 
 export default Button;

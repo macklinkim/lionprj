@@ -4,7 +4,8 @@ import PostItem from "@components/PostItem";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
+import { ReactCsspin } from 'react-csspin';
+import 'react-csspin/dist/style.css';
 const PostList = ({ data }) => {
 	const list = data.map(post => (
 		<PostItem key={post._id} post={post}>
@@ -17,6 +18,7 @@ function Board() {
 	const [posts, setPosts] = useState();
 	const router = useRouter();
 	const { data: session } = useSession();
+  const [loading, setLoading] = useState(true);
 	console.log("[board page] session user:", session?.user);
 	const getPosts = async () => {
 		try {
@@ -26,6 +28,7 @@ function Board() {
 			const data = await res.json();
 			console.log("[board page] data.res:", data.res);
 			setPosts(data.res);
+      setLoading(false);
 			return data.res;
 		} catch (error) {
 			console.log("[board page] error:", error);
@@ -62,6 +65,9 @@ function Board() {
 							<th className="p-2 whitespace-nowrap hidden sm:table-cell">작성일</th>
 						</tr>
 					</thead>
+          { loading && (
+              <ReactCsspin message="로딩중..." />
+            ) }
 					{posts && (
 						<tbody>
 							<PostList data={posts}></PostList>
