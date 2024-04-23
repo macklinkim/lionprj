@@ -2,7 +2,7 @@ async function  getProducts(id) {
   try {
     if(id){
       try {
-        const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/product/${id}`, {
+        const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/product/${id}`, {
           next: { revalidate: +process.env.NEXT_PUBLIC_REVALDATE },
         });
         const product = await res.json();
@@ -11,7 +11,7 @@ async function  getProducts(id) {
         console.log(error);
       }
     }else{
-      const res = await fetch(process.env.NEXT_PUBLIC_URL + "/api/product", {
+      const res = await fetch( process.env.NEXT_PUBLIC_BASE_URL +"/api/product", {
         cache: "force-cache",
       });
       return res.json();

@@ -20,7 +20,7 @@ function Cart({ params }) {
 		}
 		try {
 			console.log('[CartForm] addCart userId:', sessionUserId);
-			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/cart/`, {
+			const res = await fetch(`/api/cart/`, {
 				method: "POST",
 				body: JSON.stringify({ product_id: productid, user_id: sessionUserId }),
 			});
@@ -35,9 +35,7 @@ function Cart({ params }) {
 			sessionUserId = userId2;
 		}
 		try {
-			console.log("[CartForm] getCart userId:", sessionUserId);
-			console.log(process.env.NEXT_PUBLIC_URL + `/api/cart/${sessionUserId}`);
-			const res2 = await fetch(process.env.NEXT_PUBLIC_URL + `/api/cart/${sessionUserId}`, {
+			const res2 = await fetch(`/api/cart/${sessionUserId}`, {
 				method: "GET",
 				next: { revalidate: 300 },
 			});

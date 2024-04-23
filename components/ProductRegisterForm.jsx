@@ -23,8 +23,8 @@ function ProductRegisterForm() {
 		// console.log(formData);
 		// console.log("filename:", filename);
 		try {
-			// console.log(process.env.NEXT_PUBLIC_URL + "/api/product");
-			const res = await fetch(process.env.NEXT_PUBLIC_URL + "/api/product", {
+
+			const res = await fetch("/api/product", {
 				method: "POST",
 				headers: {
 					"content-type": "application/json",

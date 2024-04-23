@@ -31,7 +31,7 @@ function ImageUpload({ myFilenames }) {
 			console.log("image fetch shit even empty", image);
 		}
 		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/upload/`, {
+			const res = await fetch(`/api/upload/`, {
 				cache: "no-store",
 				method: "POST",
 				body: JSON.stringify({

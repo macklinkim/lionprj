@@ -27,7 +27,7 @@ function CartItem({ item, refreshCart }) {
 	// console.log("[CartItem] item:", item);
 	const getProduct = async () => {
 		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/product/${item.product_id}`, {
+			const res = await fetch(`/api/product/${item.product_id}`, {
 				method: "GET",
 				next: { revalidate: 300 },
 			});
@@ -42,7 +42,7 @@ function CartItem({ item, refreshCart }) {
 	};
 	const deleteCartItem = async () => {
 		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/cart/${item._id}`, {
+			const res = await fetch(`/api/cart/${item._id}`, {
 				method: "DELETE",
 			});
 			const result = await res.json();

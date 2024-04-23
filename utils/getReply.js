@@ -1,7 +1,7 @@
 async function getReply(id) {
 	try {
 		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/reply/${id}`, {
+			const res = await fetch( process.env.NEXT_PUBLIC_BASE_URL +`/api/reply/${id}`, {
 				next: { revalidate: +process.env.NEXT_PUBLIC_REVALDATE },
 			});
 			const replies = await res.json();

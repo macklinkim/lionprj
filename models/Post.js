@@ -5,7 +5,6 @@ const PostSchema = new Schema(
 		_id: {
 			type: Number,
 			required: [true, "ID is required!"],
-			unique: true,
 		},
 		content: {
 			type: String,

@@ -42,7 +42,7 @@ function OrderForm({ productid }) {
 	};
 	const order = async () => {
 		try {
-			const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/order/${session.user.userId}`, {
+			const res = await fetch(`/api/order/${session.user.userId}`, {
 				method: "POST",
 				body: JSON.stringify({ productId: i, quantity: q, address: address + " " + address2 }),
 			});
