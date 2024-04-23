@@ -43,9 +43,10 @@ function Board() {
 	return (
 		<div>
 			<section className="p-4">
-				<div className="flex items-center justify-end">
+        {session&&<div className="flex items-center justify-end">
 					<Button onClick={handleNewPost}>글쓰기</Button>
-				</div>
+				</div>}
+				
 				<table className="border-collapse w-full table-fixed">
 					<colgroup>
 						<col className="w-[10%] sm:w-[10%]" />

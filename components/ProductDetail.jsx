@@ -35,14 +35,14 @@ async function ProductDetail({ id }) {
 	// console.log('reply:',reply);
 	const replyList = reply.map((element, index) => <ReplyItem key={index} replyItem={element}></ReplyItem>);
 	return (
-		<div className="flex items-center justify-center">
+		<div className="flex my-5 items-center justify-center border-solid border-3 border-gray-900">
 			<div className="flex flex-col">
 				<div className="sm:grid sm:grid-cols-2 gap-4">
 					<div className="flex flex-col items-center justify-center">{imageList}</div>
-					<div className="flex flex-col items-left justify-center">
+					<div className="flex flex-col items-left justify-between my-3">
 						<div className="font-size-lg">상품 상세 정보</div>
 						<div>
-							<p>상품명 : {product.name>20?product.name.substring(0,20)+"...":product.name}</p>{" "}
+							<p>상품명 : {product.name > 20 ? product.name.substring(0, 20) + "..." : product.name}</p>{" "}
 						</div>
 						<div>
 							<p>상품 재고 : {product.quantity}개</p>
@@ -57,41 +57,44 @@ async function ProductDetail({ id }) {
 							<p>판매자: {product.seller_id}</p>
 						</div>
 						<ProductBuyForm></ProductBuyForm>
-						<Link href={{ pathname: `/cart/${id}` }}>
-							<Button>구매하기</Button>
-						</Link>
+						{session?.user ? (
+							<Link href={{ pathname: `/cart/${id}` }}>
+								<Button>구매하기</Button>
+							</Link>
+						) : (
+							<div> </div>
+						)}
 					</div>
 				</div>
+				<div className=" w-[2px] bg-dark-200"> </div>
 				<div>
 					<p>상품 소개</p>
-          <br></br>
+					<br></br>
 					<div className="grid grid-cols-1 items-center justify-center">{reactElements}</div>
 				</div>
 				<br></br>
 				<br></br>
 				<div>
-				<table className="border-collapse table-fixed">
-					<colgroup>
-						<col className="w-[30%] sm:w-[10%]" />
-						<col className="w-0 sm:w-[10%]" />
-						<col className="w-[70%] sm:w-[50%]" />
-						<col className="w-0 sm:w-[30%]" />
-					</colgroup>
-					<thead>
-						<tr className="border-b text-center border-solid border-gray-200">
-							<th className="p-2 text-center ">글쓴이</th>
-							<th className="p-2 text-center hidden sm:table-cell">등급</th>
-							<th className="p-2 text-center ">내용</th>
-							<th className="p-2 text-center hidden sm:table-cell">작성일</th>
-						</tr>
-					</thead>
-          <tbody className="w-full">
-            {replyList}
-          </tbody>
-          </table>
-				{session && <AddReply productId={id}></AddReply>}
+					<table className="border-collapse table-fixed">
+						<colgroup>
+							<col className="w-[30%] sm:w-[10%]" />
+							<col className="w-0 sm:w-[10%]" />
+							<col className="w-[70%] sm:w-[50%]" />
+							<col className="w-0 sm:w-[30%]" />
+						</colgroup>
+						<thead>
+							<tr className="border-b text-sm text-center border-solid border-gray-200">
+								<th className="p-2 text-center ">글쓴이</th>
+								<th className="p-2 text-center hidden sm:table-cell">등급</th>
+								<th className="p-2 text-center ">내용</th>
+								<th className="p-2 text-center hidden sm:table-cell">작성일</th>
+							</tr>
+						</thead>
+						<tbody className="w-full">{replyList}</tbody>
+					</table>
+					{session && <AddReply productId={id}></AddReply>}
+				</div>
 			</div>
-      </div>
 		</div>
 	);
 }

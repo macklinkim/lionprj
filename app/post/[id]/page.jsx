@@ -53,19 +53,21 @@ function Post({ params }) {
 			{postDetail && (
 				<section className="mb-8 p-4">
 					<div className="flex items-center justify-between">
-						<div className="font-semibold text-xl">제목 : {postDetail.title}</div>
+						<div className="font-semibold text-xl shadow-md">제목 : {postDetail.title}</div>
 					</div>
 					<div>
 						<div className="text-right text-gray-800">작성자 : {postDetail.user.name}</div>
 						<div className="text-right text-gray-800"> 작성일 : {date}</div>
 					</div>
-					<div className="my-20">
+					<div className="my-3 shadow-md">
+            <div className="p-2">내용</div>
+            <hr></hr>
 						<div>
 							<pre className="w-full p-2 whitespace-pre-wrap">{postDetail.content}</pre>
 						</div>
 						<hr />
 					</div>
-					{postDetail.replies.length === 0 ? <div> 댓글 없음</div> : postDetail.replies.map(reply => <PostReplyItem key={reply._id} reply={reply}></PostReplyItem>)}
+					{postDetail.replies.length === 0 ? <div className="p-3"> 댓글 없음</div> : postDetail.replies.map(reply => <PostReplyItem key={reply._id} reply={reply}></PostReplyItem>)}
 					<div className="flex items-center justify-end gap-20"></div>
 					<Button onClick={() => router.push("/board")}>목록으로</Button>
 					{session?.user.userId === postDetail?.user._id && <Button onClick={() => deletePost()}>게시물 삭제</Button>}

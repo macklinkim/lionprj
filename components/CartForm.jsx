@@ -12,8 +12,8 @@ function CartForm({ result, refreshCart }) {
   const itemList = result?.map(item => <CartItem key={item._id} item={item} refreshCart={refreshCart}></CartItem>);
   
 	return (
-		<section className="p-4 ">
-			<table className="border-collapse table-fixed">
+		<section className=" p-4 ">
+			<table className="w-full border-collapse table-fixed">
 				<colgroup>
 					<col className="w-[10%] sm:w-[10%]" />
 					<col className="w-[40%] sm:w-[25%]" />
@@ -25,7 +25,7 @@ function CartForm({ result, refreshCart }) {
 					<col className="w-[5%] sm:w-[8%]" />
 				</colgroup>
 				<thead>
-					<tr className="border-b text-center border-solid border-gray-200">
+					<tr className="border-b text-sm text-center border-solid border-gray-200">
 						<th className="p-2 text-center ">상품사진</th>
 						<th className="p-2 text-center ">상품명</th>
 						<th className="p-2 text-center ">상품가격</th>

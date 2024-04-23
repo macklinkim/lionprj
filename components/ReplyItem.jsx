@@ -11,7 +11,7 @@ ReplyItem.propTypes = {
 function ReplyItem({ replyItem }) {
 	const { data: session } = useSession();
 	const [userInfo, setUserInfo] = useState();
-	const [membershipClass, setMembershipClass] = useState();
+	const [membershipClass, setMembershipClass] = useState('없음');
 	console.log("session:", session);
 	const getUser = async () => {
 		try {
@@ -28,7 +28,9 @@ function ReplyItem({ replyItem }) {
 			data.codes.map(item => {
 				if (item.code == userInfo?.extra?.membershipClass) {
 					setMembershipClass(item.value);
-				}
+				}else{
+          setMembershipClass('없음');
+        }
 			});
 		} catch (error) {
 			console.log("[ReplyItem component]error:", error);
@@ -51,11 +53,11 @@ function ReplyItem({ replyItem }) {
 	}
 	return (
 		<tr>
-			<td>{userInfo.name||session.user.name}</td>
+			<td>{userInfo?.name||session?.user.name}</td>
 			<td className="p-2 text-center text-[10px] hidden sm:table-cell">{membershipClass}</td>
 			<td> {replyItem.content}</td>
 			<td className="flex items-center justify-between text-sm">
-				<div className="p-2 text-center hidden sm:table-cell"> {replyItem.createdAt}</div>
+				<div className="p-1 text-center hidden sm:table-cell"> {replyItem.createdAt}</div>
 				{session?.userId == replyItem?.user_id ? (
 					<Button type="button" size="xs" onClick={deleteReply}>
 						삭제

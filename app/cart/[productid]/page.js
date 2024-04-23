@@ -59,7 +59,7 @@ function Cart({ params }) {
 
 	return (
 		<div>
-			<div className="flex flex-col items-center justify-center">
+			<div className="my-5 flex flex-col items-center justify-center">
 				<div className="text-6xl">장바구니</div>
 				{cartProducts && <CartForm result={cartProducts}></CartForm>}
 			</div>
