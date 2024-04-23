@@ -15,7 +15,7 @@ CartItem.propType = {
 //order 화면으로 가도록
 function CartItem({ item, refreshCart }) {
 	const [cart, setCart] = useRecoilState(saveCart);
-	const [quantity, setQuantity] = useState(1);
+	const [quantity, setQuantity] = useState(0);
   const [fileName, setFileName] = useState();
 	const [product, setProduct] = useState("");
 	const [totalPrice, setTotalPrice] = useState(0);
@@ -66,7 +66,7 @@ function CartItem({ item, refreshCart }) {
 		let val = parseInt(e.target.value, 10);
 		if (isNaN(val)) {
 			console.log("[CartItem] val nan:", val);
-			setTotalPrice(0);
+			setTotalPrice(product?.price);
 		} else {
 			setQuantity(e.target.value);
 		}

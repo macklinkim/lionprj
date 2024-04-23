@@ -57,7 +57,7 @@ function ReplyItem({ replyItem }) {
 			<td className="p-2 text-center text-[10px] hidden sm:table-cell">{membershipClass}</td>
 			<td> {replyItem.content}</td>
 			<td className="flex items-center justify-between text-sm">
-				<div className="p-2 text-center hidden sm:table-cell"> {replyItem.createdAt}</div>
+				<div className="p-1 text-center hidden sm:table-cell"> {replyItem.createdAt}</div>
 				{session?.userId == replyItem?.user_id ? (
 					<Button type="button" size="xs" onClick={deleteReply}>
 						삭제

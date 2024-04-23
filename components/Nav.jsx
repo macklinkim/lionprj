@@ -33,25 +33,25 @@ function Nav() {
 	return (
 		<div className="flex items-center justify-between border-solid shadow-md h-14">
 			<div className="flex items-center justify-center gap-3 bg-light-400">
-					{!session && (
-						<Link className="ml-3 p-3" key={6} href="/login">
-							{" "}
-							로그인
-						</Link>
-					)}
-				<div className="absolute top-0 left-[3px]">
-					{session && <UserInfo></UserInfo>}
-				</div>
+				{!session && (
+					<Link className="ml-3 p-3" key={6} href="/login">
+						{" "}
+						로그인
+					</Link>
+				)}
+				<div className="absolute top-0 left-[3px]">{session && <UserInfo></UserInfo>}</div>
 			</div>
 			<Link href="/" className="absolute top-0 left-[40%] items-start justify-center hidden sm:block">
 				<Image className="hidden dark:block" src="/assets/cuteMain2.png" alt="dark-mode-image" sizes="30vw" width={170} height={100} />
 				<Image className="block dark:hidden" src="/assets/cuteMain.png" alt="light-mode-image" width={170} height={100} />
 			</Link>
 			<div className="flex justify-between p-3 items-center">
+				<p className="block sm:hidden">홈으로</p>
 				<div className="flex items-center justify-center mx-5">
 					모드<ThemeSwitch></ThemeSwitch>
 				</div>
 				<div className="flex gap-5">
+          
 					{links.map(link => (
 						<Link className="" key={link.id} href={link.url}>
 							{" "}
