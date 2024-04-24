@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
 		<html lang="en">
 			<body className={inter.className}>
 				<div className="h-[100vh] flex flex-col items-center justify-between">
-          <div className="self-start">
+          <div className="flex flex-col w-full justify-between">
 					<AuthProvider>
 						<QueryClientProvider client={queryClient}>
 							<RecoilRoot>
