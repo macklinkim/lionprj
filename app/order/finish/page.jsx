@@ -3,7 +3,6 @@ import Button from "@components/Button";
 import { saveCart } from "@utils/atom.mjs";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 // import { }
 function OrderFinish({ params }) {
