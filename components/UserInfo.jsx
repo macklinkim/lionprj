@@ -1,10 +1,9 @@
 "use client";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import { ImProfile } from "react-icons/im";
 import Link from "next/link";
 import { useState } from "react";
-import Button from "./Button";
+import Button from "@components/Button";
 export default function UserInfo() {
 	const { data: session } = useSession();
 	const [fold, setFold] = useState(true);

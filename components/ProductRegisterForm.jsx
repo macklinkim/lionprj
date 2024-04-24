@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@components/Button";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "@components/ImageUpload";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 function ProductRegisterForm() {

@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import PropTypes from "prop-types";
-import Button from "./Button";
+import Button from "@components/Button";
 import { useEffect, useState } from "react";
 
 ReplyItem.propTypes = {

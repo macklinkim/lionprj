@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import MyProfile from './MyProfile'
+import MyProfile from '@components/MyProfile'
 
 function MyProfileForm() {
   return (
