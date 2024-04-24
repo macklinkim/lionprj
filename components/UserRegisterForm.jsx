@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { produce } from "immer";
 import { useRouter } from "next/navigation";
 import DaumPostcode from "react-daum-postcode";
+import Button from "@components/Button";
 const errorStyle = {
 	fontSize: "0.7rem",
 	color: "red",
@@ -134,23 +135,23 @@ function UserRegisterForm() {
 						})}
 					/>
 					{errors && <div style={errorStyle}>{errors.password2?.message}</div>}
-					<div className="my-3 w-full">
+					<div className="w-full">
 						<label htmlFor="">이름</label>
-						<input className="rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 mx-3 px-1" name="name" id="name" type="text" {...register("name", { required: "이름 필수 입니다.", minLength: 2 })} />
+						<input className="rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 mt-3 mx-3 px-1" name="name" id="name" type="text" {...register("name", { required: "이름 필수 입니다.", minLength: 2 })} />
 						{errors && <div style={errorStyle}>{errors.name?.message}</div>}
 						<label htmlFor="type">가입유형</label>
-						<select className="rounded-lg border-solid border-2 my-2 mx-2 border-gray-400 dark:bg-gray-600" name="type" id="type" {...register("type", { required: "가입유형 필수 입니다." })}>
+						<select className="mt-3 rounded-lg border-solid border-2 my-3 mx-2 border-gray-400 dark:bg-gray-600" name="type" id="type" {...register("type", { required: "가입유형 필수 입니다." })}>
 							<option value="user">일반사용자</option>
 							<option value="seller">판매자</option>
 						</select>
 						{errors && <div style={errorStyle}>{errors.type?.message}</div>}
 					</div>
 
-					<label htmlFor="phone">휴대전화 번호(-제외): </label>
 					<div className="flex items-center">
-						<p className="mx-3">010</p>
+					<label htmlFor="phone">휴대전화</label>
+						<p className="ml-2">010-</p>
 						<input
-							className="rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 mx-2 px-1"
+							className="w-fit rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 mx-2 px-1"
 							type="tel"
 							id="phone"
 							name="phone"
@@ -177,11 +178,13 @@ function UserRegisterForm() {
 						</div>
 					</div>
 					{errors && <div style={errorStyle}>{errors.address?.message}</div>}
-
-					<button type="submit">가입하기</button>
-					<button type="button" onClick={() => reset()}>
-						취소
-					</button>
+              
+					<div className="flex items-center justify-center gap-3">
+            <Button type="submit">가입하기</Button>
+            <Button type="button" onClick={() => reset()}>
+              취소
+            </Button>
+          </div>
 					{srvError && <div style={{ color: "red", fontSize: "10px" }}>{srvError}</div>}
 				</form>
 			</div>
