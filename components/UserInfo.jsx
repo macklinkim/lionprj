@@ -25,7 +25,7 @@ export default function UserInfo() {
 							<span className=" font-bold">{session?.userType === "admin" ? "관리자" : session?.userType === "seller" ? "판매자" : "사용자"}</span> <span className="text-xs font-bold">{session?.user?.name}</span>님
 						</div>
 						<Link href="/mypage/profile">프로필</Link>
-						{session?.userType === "user" ? (
+						{session?.userType === "seller" ? (
 							<Link href={{ pathname: "/mypage/product", query: { userId: session?.userId } }} as={`/mypage/product/${session?.userId}`}>
 								내 상품 보기/등록
 							</Link>
