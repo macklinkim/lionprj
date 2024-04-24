@@ -36,7 +36,7 @@ function Nav() {
 			</Link>
 			<div className="flex justify-between p-3 items-center">
 				<p className="block sm:hidden">홈으로</p>
-				<div className="flex items-center justify-center mx-5">
+				<div className="flex items-center justify-center mx-3">
 					<ThemeSwitch></ThemeSwitch>
 				</div>
 				{links.map(link => (
