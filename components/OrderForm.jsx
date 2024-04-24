@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { useRouter } from "next/navigation";
-import Button from "./Button";
+import Button from "@components/Button";
 import { useSession } from "next-auth/react";
 
 OrderForm.propType = {

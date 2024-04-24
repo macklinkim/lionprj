@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import Button from "./Button";
+import Button from "@components/Button";
 import { useRouter } from "next/navigation";
 function Email() {
 	const form = useRef();

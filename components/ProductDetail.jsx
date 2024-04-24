@@ -5,12 +5,11 @@ import { getServerSession } from "next-auth/next";
 import getImages from "@utils/getImages";
 import getProducts from "@utils/getProduct";
 import getReply from "@utils/getReply";
-import ReplyForm from "@components/ReplyForm";
 import AddReply from "@components/AddReply";
 import Button from "@components/Button";
 import ProductBuyForm from "@components/ProductBuyForm";
 import Link from "next/link";
-import ReplyItem from "./ReplyItem";
+import ReplyItem from "@components/ReplyItem";
 ProductDetail.propType = {
 	id: String,
 };

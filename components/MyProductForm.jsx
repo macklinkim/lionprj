@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Button from "./Button";
-import ProductCard from "./ProductCard";
+import ProductCard from "@components/ProductCard";
 import PropTypes from "prop-types";
 MyProductForm.propType = {
 	userId: PropTypes.number,

@@ -1,4 +1,4 @@
-import ShoppingForm from '../../components/ShoppingForm';
+import ShoppingForm from '@/components/ShoppingForm';
 
 function Shopping() {
   return (

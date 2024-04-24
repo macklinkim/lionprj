@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import UserInfo from "./UserInfo";
+import UserInfo from "@components/UserInfo";
 import ThemeSwitch from "@components/ThemeSwitch";
 const links = [
 	{
