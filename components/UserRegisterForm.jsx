@@ -97,7 +97,7 @@ function UserRegisterForm() {
 				<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
 					<label htmlFor="email">이메일</label>
 					<input
-						className="rounded-lg dark:bg-gray-600 px-1"
+						className="my-2 rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 px-1"
 						name="email"
 						id="email"
 						type="email"
@@ -112,7 +112,7 @@ function UserRegisterForm() {
 					{errors && <div style={errorStyle}>{errors.email?.message}</div>}
 					<label htmlFor="password1">비밀번호</label>
 					<input
-						className="rounded-lg dark:bg-gray-600 px-1"
+						className="my-2 rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 px-1"
 						name="password1"
 						id="password1"
 						type="password"
@@ -124,7 +124,7 @@ function UserRegisterForm() {
 					{errors && <div style={errorStyle}>{errors.password1?.message}</div>}
 					<label htmlFor="password2">비밀번호 확인</label>
 					<input
-						className="rounded-lg dark:bg-gray-600 px-1"
+						className="my-2 rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 px-1"
 						name="password2"
 						id="password2"
 						type="password"
@@ -136,10 +136,10 @@ function UserRegisterForm() {
 					{errors && <div style={errorStyle}>{errors.password2?.message}</div>}
 					<div className="my-3 w-full">
 						<label htmlFor="">이름</label>
-						<input className="rounded-lg dark:bg-gray-600  px-1" name="name" id="name" type="text" {...register("name", { required: "이름 필수 입니다.", minLength: 2 })} />
+						<input className="rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 mx-3 px-1" name="name" id="name" type="text" {...register("name", { required: "이름 필수 입니다.", minLength: 2 })} />
 						{errors && <div style={errorStyle}>{errors.name?.message}</div>}
 						<label htmlFor="type">가입유형</label>
-						<select className="rounded-lg dark:bg-gray-600" name="type" id="type" {...register("type", { required: "가입유형 필수 입니다." })}>
+						<select className="rounded-lg border-solid border-2 my-2 mx-2 border-gray-400 dark:bg-gray-600" name="type" id="type" {...register("type", { required: "가입유형 필수 입니다." })}>
 							<option value="user">일반사용자</option>
 							<option value="seller">판매자</option>
 						</select>
@@ -147,10 +147,10 @@ function UserRegisterForm() {
 					</div>
 
 					<label htmlFor="phone">휴대전화 번호(-제외): </label>
-					<div style={{ display: "flex", alignItems: "center" }}>
+					<div className="flex items-center">
 						<p className="mx-3">010</p>
 						<input
-							className="rounded-lg dark:bg-gray-600 px-1"
+							className="rounded-lg border-solid border-2 border-gray-400 dark:bg-gray-600 mx-2 px-1"
 							type="tel"
 							id="phone"
 							name="phone"
@@ -165,15 +165,15 @@ function UserRegisterForm() {
 						/>
 					</div>
 					{errors && <div style={errorStyle}>{errors.phone?.message}</div>}
-					<div>
-						<div className="w-[70%] text-xl flex flex-col justify-center items-start">
+					<div className="w-full my-3">
+						<div className="w-full text-xl flex flex-col justify-center items-start">
 							<label htmlFor="address">주소</label>
-							<input className="w-full border-solid border-2 border-gray-300" type="text" name="address1" id="address1" readOnly={true} {...register("address1", { required: "배송주소를 입력해주세요." })}></input>
+							<input className="w-full rounded-lg my-3 border-solid border-2 border-gray-300 dark:bg-gray-600" type="text" name="address1" id="address1" readOnly={true} {...register("address1", { required: "배송주소를 입력해주세요." })}></input>
 							<DaumPostcode onComplete={handleComplete} />
 						</div>
-						<div className="w-[70%]">
+						<div className="w-full my-3">
 							<label htmlFor="address">나머지 주소</label>
-							<input className="w-full border-solid border-2 border-gray-300" type="text" name="address2" id="address2" {...register("address2", { required: "나머지 주소를 입력해주세요." })}></input>
+							<input className="rounded-lg w-full border-solid border-2 border-gray-300 dark:bg-gray-600" type="text" name="address2" id="address2" {...register("address2", { required: "나머지 주소를 입력해주세요." })}></input>
 						</div>
 					</div>
 					{errors && <div style={errorStyle}>{errors.address?.message}</div>}
