@@ -11,7 +11,7 @@ ReplyItem.propTypes = {
 function ReplyItem({ replyItem }) {
 	const { data: session } = useSession();
 	const [userInfo, setUserInfo] = useState();
-	const [membershipClass, setMembershipClass] = useState("없음");
+	const [membershipClass, setMembershipClass] = useState();
 	console.log("session:", session);
 	const getUser = async () => {
 		try {
@@ -24,11 +24,11 @@ function ReplyItem({ replyItem }) {
 		try {
 			const res = await fetch(`/api/code/membershipClass`);
 			const data = await res.json();
-			data.codes.map(item => {
+      console.log("[ReplyItem component]data:", data);
+			data?.codes.map(item => {
 				if (item.code == userInfo?.extra?.membershipClass) {
+          console.log(item.code, userInfo?.extra?.membershipClass, item.value)
 					setMembershipClass(item.value);
-				} else {
-					setMembershipClass("없음");
 				}
 			});
 		} catch (error) {
