@@ -74,7 +74,6 @@ async function ProductDetail({ id }) {
 						<thead>
 							<tr className="border-b text-sm text-center border-solid border-gray-200">
 								<th className="p-2 text-center ">글쓴이</th>
-								<th className="p-2 text-center hidden sm:table-cell">등급</th>
 								<th className="p-2 text-center ">내용</th>
 								<th className="p-2 text-center hidden sm:table-cell">작성일</th>
 							</tr>
