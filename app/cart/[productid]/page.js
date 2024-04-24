@@ -51,7 +51,9 @@ function Cart({ params }) {
     if(!sessionUserId){
       setUserId(userId2);
     }
-		addCart();
+    if(productid!==0){
+      addCart();
+    }
 		getCart(sessionUserId);
 	}, []);
 

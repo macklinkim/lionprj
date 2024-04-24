@@ -1,6 +1,8 @@
 "use client";
 import PropTypes from "prop-types";
 import CartItem from "@/components/CartItem";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 CartForm.propType = {
 	result: PropTypes.object,
 	productid: PropTypes.number,
@@ -8,7 +10,30 @@ CartForm.propType = {
 let totalOrder = [];
 function CartForm({ result, refreshCart }) {
 	console.log("[CartForm] result:", result);
-	const itemList = result?.map(item => <CartItem key={item._id} item={item} refreshCart={refreshCart}></CartItem>);
+	const { data: session } = useSession();
+	console.log("[CartForm] session:", session);
+  const [itemList, setItemList] = useState();
+	const getCart = async sessionUserId => {
+		try {
+			const res2 = await fetch(`/api/cart/${sessionUserId}`, {
+				method: "GET",
+				next: { revalidate: 300 },
+			});
+			const data = await res2.json();
+			console.log("[CartForm] data:", data);
+			const List = data?.map(item => <CartItem key={item._id} item={item} refreshCart={refreshCart}></CartItem>);
+      setItemList(List);
+			return data;
+		} catch (error) {
+			console.log("[CartForm] error:", error);
+		}
+	};
+	useEffect(() => {
+		getCart(session?.user.userId);
+	}, []);
+	console.log("[CartForm] result:", result);
+	
+
 	return (
 		<section className=" p-4 ">
 			<table className="w-full border-collapse table-fixed">

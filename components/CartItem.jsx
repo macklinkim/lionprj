@@ -24,7 +24,7 @@ function CartItem({ item, refreshCart }) {
 		console.log("[CartItem] val nan:", totalPrice);
 		setTotalPrice(0);
 	}
-	// console.log("[CartItem] item:", item);
+	console.log("[CartItem] item:", item);
 	const getProduct = async () => {
 		try {
 			const res = await fetch(`/api/product/${item.product_id}`, {
@@ -47,7 +47,7 @@ function CartItem({ item, refreshCart }) {
 			});
 			const result = await res.json();
 			console.log("[CartItem] result:", result);
-			location.reload();
+			router.push(`/cart/0`);
 		} catch (error) {
 			console.log("[CartItem] error:", error);
 		}
