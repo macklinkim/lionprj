@@ -51,7 +51,8 @@ function Cart({ params }) {
     if(!sessionUserId){
       setUserId(userId2);
     }
-    if(productid!==0){
+    if(productid!=0){
+      console.log('[Cart] inside id == 0 productid, userid:', productid, sessionUserId);
       addCart();
     }
 		getCart(sessionUserId);
