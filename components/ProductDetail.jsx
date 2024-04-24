@@ -40,21 +40,11 @@ async function ProductDetail({ id }) {
 					<div className="flex flex-col items-center justify-center">{imageList}</div>
 					<div className="flex flex-col items-left justify-between my-3">
 						<div className="font-size-lg">상품 상세 정보</div>
-						<div>
-							상품명 : {product.name > 20 ? product.name.substring(0, 20) + "..." : product.name}{" "}
-						</div>
-						<div>
-							상품 재고 : {product.quantity}개
-						</div>
-						<div>
-							상품 가격 : {product.price.toLocaleString("ko-KR")}원
-						</div>
-						<div>
-							배송비: {product.shippingFees}
-						</div>
-						<div>
-							판매자: {product.seller_id}
-						</div>
+						<div>상품명 : {product.name > 20 ? product.name.substring(0, 20) + "..." : product.name} </div>
+						<div>상품 재고 : {product.quantity}개</div>
+						<div>상품 가격 : {product.price.toLocaleString("ko-KR")}원</div>
+						<div>배송비: {product.shippingFees}</div>
+						<div>판매자: {product.seller_id}</div>
 						<ProductBuyForm></ProductBuyForm>
 						{session?.user ? (
 							<Link href={{ pathname: `/cart/${id}` }}>

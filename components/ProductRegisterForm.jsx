@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@components/Button";
 import ImageUpload from "@components/ImageUpload";
@@ -15,15 +15,12 @@ function ProductRegisterForm() {
 	const {
 		register,
 		handleSubmit,
-		reset,
 		formState: { errors },
 	} = useForm();
 	const onSubmit = async formData => {
-    
 		// console.log(formData);
 		// console.log("filename:", filename);
 		try {
-
 			const res = await fetch("/api/product", {
 				method: "POST",
 				headers: {
@@ -32,10 +29,9 @@ function ProductRegisterForm() {
 				body: JSON.stringify({ ...formData, seller_id: session.userId, filename: filename }),
 			});
 			console.log("[ProductRegisterForm] res:", res);
-			if (res.status === 200&&
-      res.url.endsWith("/api/product")) {
+			if (res.status === 200 && res.url.endsWith("/api/product")) {
 				alert("상품등록에 성공했습니다.");
-        router.back();
+				router.back();
 			}
 		} catch (error) {
 			console.log(error);
