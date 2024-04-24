@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import postReply from "@utils/postReply";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 AddReply.propType = {
 	productId: PropTypes.number,
 };

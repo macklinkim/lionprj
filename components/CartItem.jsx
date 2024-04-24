@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Image from "next/image";
-import Button from "@componentsButton";
+import Button from "@components/Button";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { saveCart } from "@utils/atom";

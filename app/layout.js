@@ -5,7 +5,6 @@ import Nav from "@components/Nav";
 import { AuthProvider, DarkProviders } from "./Providers";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Footer from "@components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 const metadata = {
 	title: "Like Lion Shopping",
