@@ -167,7 +167,7 @@ function UserRegisterForm() {
 					{errors && <div style={errorStyle}>{errors.phone?.message}</div>}
 					<div>
 						<div className="w-[70%] text-xl flex flex-col justify-center items-start">
-							<label htmlFor="address">배송주소</label>
+							<label htmlFor="address">주소</label>
 							<input className="w-full border-solid border-2 border-gray-300" type="text" name="address1" id="address1" readOnly={true} {...register("address1", { required: "배송주소를 입력해주세요." })}></input>
 							<DaumPostcode onComplete={handleComplete} />
 						</div>
