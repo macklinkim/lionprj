@@ -31,8 +31,8 @@ function Nav() {
 				<div className="absolute top-0 left-[3px]">{session && <UserInfo></UserInfo>}</div>
 			</div>
 			<Link href="/" className="absolute top-0 left-[40%] items-start justify-center hidden sm:block">
-				<Image className="hidden dark:block" src="/assets/cuteMain2.png" alt="dark-mode-image" sizes="30vw" width={170} height={100} />
-				<Image className="block dark:hidden" src="/assets/cuteMain.png" alt="light-mode-image" width={170} height={100} />
+				<Image className="hidden dark:block" src="/assets/cuteMain2.png" alt="dark-mode-image" sizes="30vw" width={160} height={100} />
+				<Image className="block dark:hidden" src="/assets/cuteMain.png" alt="light-mode-image" width={160} height={100} />
 			</Link>
 			<div className="flex justify-between p-3 items-center">
 				<p className="block sm:hidden">홈으로</p>
