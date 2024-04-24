@@ -27,7 +27,7 @@ async function ProductCard({ item, isMyProduct }) {
 						<p className="px-3 text-[12px] text-wrap break-words sm break-all text-ellipsis">{item.name.length > 20 ? item.name.substring(0, 20) + "..." : item.name}</p>
 					</div>
 					<div className="w-[100%] flex flex-col justify-between px-3 pb-2">
-						<div className="text-[12px]">판매가 {item.price}원</div>
+						<div className="text-[12px]">판매가 {item.price.toLocaleString("ko-KR")}원</div>
 					</div>
 				</Link>
 			)}

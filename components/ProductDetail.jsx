@@ -16,7 +16,7 @@ ProductDetail.propType = {
 };
 async function ProductDetail({ id }) {
 	const product = await getProducts(id);
-	const newContent = product?.content.replace(/<img src="\/api\/download/g, `<img src=\"${process.env.NEXT_PUBLIC_URL}/assets/images/`);
+	const newContent = product?.content.replace(/<img src="\/api\/download/g, `<img src=\"${process.env.NEXT_PUBLIC_BASE_URL}assets/images/`);
 	const reactElements = parse(newContent);
 	const images = [];
 	const session = await getServerSession();
@@ -42,19 +42,19 @@ async function ProductDetail({ id }) {
 					<div className="flex flex-col items-left justify-between my-3">
 						<div className="font-size-lg">상품 상세 정보</div>
 						<div>
-							<p>상품명 : {product.name > 20 ? product.name.substring(0, 20) + "..." : product.name}</p>{" "}
+							상품명 : {product.name > 20 ? product.name.substring(0, 20) + "..." : product.name}{" "}
 						</div>
 						<div>
-							<p>상품 재고 : {product.quantity}개</p>
+							상품 재고 : {product.quantity}개
 						</div>
 						<div>
-							<p>상품 가격 : {product.price.toLocaleString("ko-KR")}원</p>
+							상품 가격 : {product.price.toLocaleString("ko-KR")}원
 						</div>
 						<div>
-							<p>배송비: {product.shippingFees}</p>
+							배송비: {product.shippingFees}
 						</div>
 						<div>
-							<p>판매자: {product.seller_id}</p>
+							판매자: {product.seller_id}
 						</div>
 						<ProductBuyForm></ProductBuyForm>
 						{session?.user ? (
@@ -68,7 +68,7 @@ async function ProductDetail({ id }) {
 				</div>
 				<div className=" w-[2px] bg-dark-200"> </div>
 				<div>
-					<p>상품 소개</p>
+					상품 소개
 					<br></br>
 					<div className="grid grid-cols-1 items-center justify-center">{reactElements}</div>
 				</div>

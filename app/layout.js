@@ -27,29 +27,27 @@ export default function RootLayout({ children }) {
 					</QueryClientProvider>
 				</AuthProvider>
 
-				<footer class="fixed bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
-					<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+				<footer className="fixed bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-[#181818] dark:border-gray-700">
+					<span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
 						© 2024{" "}
-						<a href="https://www.likelion.net/" class="hover:underline">
+						<a href="https://www.likelion.net/" className="hover:underline">
 							멋쟁이 사자들
 						</a>
 						. All Rights Reserved.
 					</span>
-					<ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+					<ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
 						<li>
-							<a href="https://github.com/macklinkim/" class="hover:underline me-4 md:me-6">
+							<a href="https://github.com/macklinkim/" className="hover:underline me-4 md:me-6">
 								GIT HUB
 							</a>
 						</li>
 						<li>
-							<a href="/email" class="hover:underline">
+							<a href="/email" className="hover:underline">
 								연락처: kopsert@gmail.com
 							</a>
 						</li>
 					</ul>
 				</footer>
-
-				{/* <Footer></Footer> */}
 			</body>
 		</html>
 	);

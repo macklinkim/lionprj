@@ -8,8 +8,7 @@ MyProductForm.propType = {
 
 async function getMyProducts(userId) {
 	try {
-		console.log(process.env.NEXT_PUBLIC_URL + `/api/user/${userId}/product`);
-		const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/user/${userId}/product`, {
+		const res = await fetch(`/api/user/${userId}/product`, {
 			cache: "force-cache",
 		});
 		const product = await res.json();

@@ -5,7 +5,7 @@ async function page() {
   const session = await getServerSession();
   let result = null;
   try {
-		const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/user`, {
+		const res = await fetch(`/api/user`, {
 			method: "POST",
 			body: JSON.stringify({ email: session.user.email }),
 		});

@@ -1,6 +1,6 @@
 async function getUser(id) {
 	try {
-		const res = await fetch(process.env.NEXT_PUBLIC_URL + `/api/user/${id}`, {
+		const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL +`/api/user/${id}`, {
 			next: { revalidate: +process.env.NEXT_PUBLIC_REVALDATE },
 		});
 		const user = await res.json();

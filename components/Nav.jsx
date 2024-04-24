@@ -16,17 +16,6 @@ const links = [
 		title: "게시판",
 		url: "/board",
 	},
-	// {
-	// 	id: 4,
-	//   title: "About",
-	// 	url: "/about",
-
-	// },
-	// {
-	// 	id: 5,
-	// 	title: "Contact",
-	// 	url: "/contact",
-	// }
 ];
 function Nav() {
 	const { data: session } = useSession();
@@ -48,17 +37,13 @@ function Nav() {
 			<div className="flex justify-between p-3 items-center">
 				<p className="block sm:hidden">홈으로</p>
 				<div className="flex items-center justify-center mx-5">
-					모드<ThemeSwitch></ThemeSwitch>
+					<ThemeSwitch></ThemeSwitch>
 				</div>
-				<div className="flex gap-5">
-          
 					{links.map(link => (
-						<Link className="" key={link.id} href={link.url}>
-							{" "}
+						<Link className="mx-2" key={link.id} href={link.url}>
 							{link.title}
 						</Link>
 					))}
-				</div>
 			</div>
 		</div>
 	);

@@ -43,7 +43,7 @@ function ReplyItem({ replyItem }) {
 
 	async function deleteReply() {
 		try {
-			const res = fetch(process.env.NEXT_PUBLIC_URL + `/api/reply/${replyItem.reply_id}`, {
+			const res = fetch(`/api/reply/${replyItem.reply_id}`, {
 				method: "DELETE",
 			});
 			return res;

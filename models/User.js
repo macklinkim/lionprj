@@ -4,7 +4,6 @@ const UserSchema = new Schema(
 	{
 		_id: {
 			type: Number,
-			unique: [true, "_id already exists!"],
 			required: [true, "_id is required!"],
 		},
 		email: {
