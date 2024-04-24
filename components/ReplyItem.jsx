@@ -14,29 +14,29 @@ function ReplyItem({ replyItem }) {
 	const [membershipClass, setMembershipClass] = useState();
 	const getUser = async () => {
 		try {
-			const res = await fetch(`/api/user/${replyItem.user_id}`);
+			const res = await fetch(`/api/user/${replyItem.user_id}`, {
+				cache: "force-cache",
+			});
 			const data = await res.json();
+			const res2 = await fetch(`/api/code/membershipClass`, {
+				cache: "force-cache",
+			});
+			const data2 = await res2.json();
+			const codes = data2.codes;
+			console.log("[ReplyItem component] codes:", codes);
 			setUserInfo(data.user);
+			const membership = codes.filter(item => {
+				if (item.code == userInfo?.extra.membershipClass) {
+					return item;
+				}
+			});
+			console.log("[ReplyItem component] membershipClass:", membership[0].value);
+			setMembershipClass(membership[0].value);
+			console.log("[ReplyItem component] userInfo:", userInfo);
 		} catch (error) {}
-	};
-	const getCode = async () => {
-		try {
-			const res = await fetch(`/api/code/membershipClass`);
-			const data = await res.json();
-			const codes = data.codes;
-      const membershipClass = data.codes.filter(item => {
-        if (item.code == userInfo?.extra.membershipClass) {
-          return item;
-        }
-      });
-			setMembershipClass(membershipClass[0].value);
-		} catch (error) {
-			console.log("[ReplyItem component]error:", error);
-		}
 	};
 	useEffect(() => {
 		getUser();
-		getCode();
 	}, []);
 
 	async function deleteReply() {
