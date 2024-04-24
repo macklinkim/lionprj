@@ -12,7 +12,6 @@ function ReplyItem({ replyItem }) {
 	const { data: session } = useSession();
 	const [userInfo, setUserInfo] = useState();
 	const [membershipClass, setMembershipClass] = useState();
-	console.log("session:", session);
 	const getUser = async () => {
 		try {
 			const res = await fetch(`/api/user/${replyItem.user_id}`);
@@ -24,13 +23,13 @@ function ReplyItem({ replyItem }) {
 		try {
 			const res = await fetch(`/api/code/membershipClass`);
 			const data = await res.json();
-      console.log("[ReplyItem component]data:", data);
-			data?.codes.map(item => {
-				if (item.code == userInfo?.extra?.membershipClass) {
-          console.log(item.code, userInfo?.extra?.membershipClass, item.value)
-					setMembershipClass(item.value);
-				}
-			});
+			const codes = data.codes;
+      const membershipClass = data.codes.filter(item => {
+        if (item.code == userInfo?.extra.membershipClass) {
+          return item;
+        }
+      });
+			setMembershipClass(membershipClass[0].value);
 		} catch (error) {
 			console.log("[ReplyItem component]error:", error);
 		}
