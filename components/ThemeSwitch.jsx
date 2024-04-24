@@ -1,6 +1,5 @@
 "use client";
 
-import { FiSun, FiMoon } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
@@ -12,13 +11,19 @@ export default function ThemeSwitch() {
 
 	if (resolvedTheme === "dark") {
 		return (
-				<FiSun onClick={() => setTheme("light")} />
+        <div>
+          <button onClick={() => setTheme("light")}>🌜모드</button>
+          {/* <FiSun onClick={() => setTheme("light")} /> */}
+        </div>
 		);
 	}
 
 	if (resolvedTheme === "light") {
 		return (
-				<FiMoon  onClick={() => setTheme("dark")} />
+      <div>
+        <button onClick={() => setTheme("dark")}>🌅모드</button>
+				{/* <FiMoon  onClick={() => setTheme("dark")} /> */}
+      </div>
 		);
 	}
 }
