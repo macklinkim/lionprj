@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {  useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import UserInfo from "@components/UserInfo";
 import ThemeSwitch from "@components/ThemeSwitch";
 const links = [
@@ -39,11 +39,11 @@ function Nav() {
 				<div className="flex items-center justify-center mx-5">
 					<ThemeSwitch></ThemeSwitch>
 				</div>
-					{links.map(link => (
-						<Link className="mx-2" key={link.id} href={link.url}>
-							{link.title}
-						</Link>
-					))}
+				{links.map(link => (
+					<Link className="mx-2" key={link.id} href={link.url}>
+						{link.title}
+					</Link>
+				))}
 			</div>
 		</div>
 	);

@@ -77,7 +77,9 @@ function LoginForm() {
 						</Link>
 					</div>
 				</form>
-				<Link className="flex items-center justify-center mt-6 hover:underline" href="/googlelogin">Google Login</Link>
+				<Link className="flex items-center justify-center mt-6 hover:underline" href="/googlelogin">
+					Google Login
+				</Link>
 			</div>
 		</div>
 	);

@@ -16,14 +16,14 @@ CartItem.propType = {
 function CartItem({ item, refreshCart }) {
 	const [cart, setCart] = useRecoilState(saveCart);
 	const [quantity, setQuantity] = useState(0);
-  const [fileName, setFileName] = useState();
+	const [fileName, setFileName] = useState();
 	const [product, setProduct] = useState("");
 	const [totalPrice, setTotalPrice] = useState(0);
-  const router = useRouter();
-  if (isNaN(totalPrice)) {
-    console.log("[CartItem] val nan:", totalPrice);
-    setTotalPrice(0);
-  }
+	const router = useRouter();
+	if (isNaN(totalPrice)) {
+		console.log("[CartItem] val nan:", totalPrice);
+		setTotalPrice(0);
+	}
 	// console.log("[CartItem] item:", item);
 	const getProduct = async () => {
 		try {
@@ -33,7 +33,7 @@ function CartItem({ item, refreshCart }) {
 			});
 			const data = await res.json();
 			setProduct(data.product);
-      setFileName('/assets/images/' + data.product.mainImages[0]?.fileName);
+			setFileName("/assets/images/" + data.product.mainImages[0]?.fileName);
 			console.log("[CartItem] product:", data.product.mainImages[0]);
 			return data.product;
 		} catch (error) {
@@ -53,7 +53,7 @@ function CartItem({ item, refreshCart }) {
 		}
 	};
 	useEffect(() => {
-    if (isNaN(totalPrice)) {
+		if (isNaN(totalPrice)) {
 			console.log("[CartItem] val nan:", totalPrice);
 			setTotalPrice(0);
 		}
@@ -74,7 +74,7 @@ function CartItem({ item, refreshCart }) {
 
 	return (
 		<tr className="border-solid border-2  text-center self-center">
-      <td className="self-center"> {!fileName?<div>로딩중</div>:<Image src={fileName} alt="image" width={100} height={100} />}</td>
+			<td className="self-center"> {!fileName ? <div>로딩중</div> : <Image src={fileName} alt="image" width={100} height={100} />}</td>
 			<td className="self-center">{product.name}</td>
 			<td className="self-center">{product.price}</td>
 			<td className="self-center">{product.shippingFees}</td>
@@ -85,7 +85,7 @@ function CartItem({ item, refreshCart }) {
 					name="quantity"
 					id="quantity"
 					min="0"
-          value={quantity}
+					value={quantity}
 					onChange={e => {
 						handleQuantity(e);
 					}}

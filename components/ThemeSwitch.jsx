@@ -11,19 +11,19 @@ export default function ThemeSwitch() {
 
 	if (resolvedTheme === "dark") {
 		return (
-        <div>
-          <button onClick={() => setTheme("light")}>🌜모드</button>
-          {/* <FiSun onClick={() => setTheme("light")} /> */}
-        </div>
+			<div>
+				<button onClick={() => setTheme("light")}>🌜모드</button>
+				{/* <FiSun onClick={() => setTheme("light")} /> */}
+			</div>
 		);
 	}
 
 	if (resolvedTheme === "light") {
 		return (
-      <div>
-        <button onClick={() => setTheme("dark")}>🌅모드</button>
+			<div>
+				<button onClick={() => setTheme("dark")}>🌅모드</button>
 				{/* <FiMoon  onClick={() => setTheme("dark")} /> */}
-      </div>
+			</div>
 		);
 	}
 }

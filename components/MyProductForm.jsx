@@ -26,7 +26,9 @@ async function MyProductForm({ userId }) {
 			<br></br>
 			<div className="flex justify-between items-center">
 				<div className="text-3xl text-center">내 상품 목록</div>
-				<Link className="border-solid border-2 border-blue-200 rounded-md p-1 bg-blue-200" href={{ pathname: "/product/new" }}>상품 추가하기</Link>
+				<Link className="border-solid border-2 border-blue-200 rounded-md p-1 bg-blue-200" href={{ pathname: "/product/new" }}>
+					상품 추가하기
+				</Link>
 			</div>
 			<br></br>
 			<div className="grid grid-cols-5 gap-4">

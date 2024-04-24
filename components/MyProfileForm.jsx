@@ -1,13 +1,14 @@
-'use client'
-import React from 'react'
-import MyProfile from '@components/MyProfile'
+"use client";
+import React from "react";
+import MyProfile from "@components/MyProfile";
 
 function MyProfileForm() {
-  return (
-    <div>MyProfileForm
-      <MyProfile></MyProfile>
-    </div>
-  )
+	return (
+		<div>
+			MyProfileForm
+			<MyProfile></MyProfile>
+		</div>
+	);
 }
 
-export default MyProfileForm
+export default MyProfileForm;

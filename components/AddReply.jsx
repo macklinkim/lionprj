@@ -5,27 +5,27 @@ import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import postReply from "@utils/postReply";
 import { useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 AddReply.propType = {
 	productId: PropTypes.number,
 };
-function AddReply({productId}) {
-  const router = useRouter();
-  const { data: session } =  useSession();
-  const {
+function AddReply({ productId }) {
+	const router = useRouter();
+	const { data: session } = useSession();
+	const {
 		register,
 		handleSubmit,
 		reset,
 		formState: { errors },
 	} = useForm();
 	const onSubmit = async formData => {
-    const newFormData = {
-      ...formData,
-      productId: productId,
-      userId:session.userId,
-    }
-    const res = await postReply(newFormData);
-    router.refresh();
+		const newFormData = {
+			...formData,
+			productId: productId,
+			userId: session.userId,
+		};
+		const res = await postReply(newFormData);
+		router.refresh();
 	};
 	return (
 		<div>

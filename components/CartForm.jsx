@@ -8,9 +8,7 @@ CartForm.propType = {
 let totalOrder = [];
 function CartForm({ result, refreshCart }) {
 	console.log("[CartForm] result:", result);
-
-  const itemList = result?.map(item => <CartItem key={item._id} item={item} refreshCart={refreshCart}></CartItem>);
-  
+	const itemList = result?.map(item => <CartItem key={item._id} item={item} refreshCart={refreshCart}></CartItem>);
 	return (
 		<section className=" p-4 ">
 			<table className="w-full border-collapse table-fixed">
