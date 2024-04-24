@@ -75,9 +75,9 @@ function CartItem({ item, refreshCart }) {
 	return (
 		<tr className="border-solid border-2  text-center self-center">
 			<td className="self-center"> {!fileName ? <div>로딩중</div> : <Image src={fileName} alt="image" width={100} height={100} />}</td>
-			<td className="self-center">{product.name}</td>
-			<td className="self-center">{product.price}</td>
-			<td className="self-center">{product.shippingFees}</td>
+			<td className="self-center">{product?.name}</td>
+			<td className="self-center">{product?.price}</td>
+			<td className="self-center">{product?.shippingFees}</td>
 			<td className="self-center">
 				<input
 					className="w-10 border-solid border-2"
