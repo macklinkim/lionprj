@@ -21,19 +21,17 @@ function CartForm({ result, refreshCart }) {
 			});
 			const data = await res2.json();
 			console.log("[CartForm] data:", data);
-			const List = data?.map(item => <CartItem key={item._id} item={item} refreshCart={refreshCart}></CartItem>);
-      setItemList(List);
+      setItemList(data);
 			return data;
 		} catch (error) {
-			console.log("[CartForm] error:", error);
+      console.log("[CartForm] error:", error);
 		}
 	};
 	useEffect(() => {
-		getCart(session?.user.userId);
+    getCart(session?.user.userId);
 	}, []);
 	console.log("[CartForm] result:", result);
-	
-
+  const List  = itemList?.map(item => <CartItem key={item._id} item={item} refreshCart={refreshCart}></CartItem>);
 	return (
 		<section className=" p-4 ">
 			<table className="w-full border-collapse table-fixed">
@@ -59,7 +57,7 @@ function CartForm({ result, refreshCart }) {
 						<th className="p-2 text-center hidden sm:table-cell">삭제</th>
 					</tr>
 				</thead>
-				<tbody className="w-full">{itemList}</tbody>
+				<tbody className="w-full">{List}</tbody>
 			</table>
 		</section>
 	);
