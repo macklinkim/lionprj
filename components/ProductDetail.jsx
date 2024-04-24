@@ -66,8 +66,7 @@ async function ProductDetail({ id }) {
 				<div>
 					<table className="border-collapse table-fixed">
 						<colgroup>
-							<col className="w-[30%] sm:w-[10%]" />
-							<col className="w-0 sm:w-[10%]" />
+							<col className="w-[30%] sm:w-[20%]" />
 							<col className="w-[70%] sm:w-[50%]" />
 							<col className="w-0 sm:w-[30%]" />
 						</colgroup>
